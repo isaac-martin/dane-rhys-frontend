@@ -1,9 +1,13 @@
 import React from "react"
 
-const Actions = ({ actions }) => {
+const Actions = ({ actions, displayMode }) => {
+let actionsArr = actions
+if (displayMode === "indexView"){
+actionsArr = actions.filter(action => action.label !== "Quote")
+}
   return (
     <>
-      {actions.map(action => (
+      {actionsArr.map(action => (
         <button onClick={action.onClick}>{action.label}</button>
       ))}
     </>
