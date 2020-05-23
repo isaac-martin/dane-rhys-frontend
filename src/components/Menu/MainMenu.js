@@ -62,11 +62,17 @@ const MainMenu = () => {
             }
           }
         }
+        homeImages {
+          asset {
+            fluid {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
       }
     }
   `)
 
-  console.log(menu)
   const subMenus = menu.sanityMenu.menuItems
   return (
     <section>

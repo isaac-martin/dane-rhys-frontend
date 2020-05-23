@@ -6,8 +6,24 @@
  */
 
 import React from "react"
+import { Box } from "theme-ui"
+import styled from "@emotion/styled"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import { padding, margin } from "polished"
 import "./layout.css"
+
+export const Back = styled(Link)(({ active, theme, size = 16 }) => {
+  return {
+    color: "black",
+    background: `none`,
+    position: `absolute`,
+    border: `none`,
+    fontWeight: active ? `bold` : `normal`,
+    fontSize: size,
+    ...padding(0, theme.space[1]),
+    ...margin(0),
+  }
+})
 
 const Layout = ({ children, showBackBtn }) => {
   const data = useStaticQuery(graphql`
@@ -21,10 +37,10 @@ const Layout = ({ children, showBackBtn }) => {
   `)
 
   return (
-    <div>
-      {showBackBtn && <Link to="/"> "back" </Link>}
-      <main>{children}</main>
-    </div>
+    <Box p={4} css={{ height: `100vh` }}>
+      {showBackBtn && <Back to="/">Back</Back>}
+      {children}
+    </Box>
   )
 }
 
