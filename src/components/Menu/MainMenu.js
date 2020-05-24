@@ -1,5 +1,5 @@
 import React from "react"
-import Submenu from "./Submenu"
+import Submenu from "./SubMenu"
 
 import { useStaticQuery, graphql } from "gatsby"
 
