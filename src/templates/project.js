@@ -90,7 +90,6 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     actions["quote"],
   ]
 
-  console.log(sanityProject)
   const {
     theme: { space },
   } = useThemeUI()
@@ -123,7 +122,9 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               )}
 
               <Actions
-                hasQuote={currentImage.content.quote !== undefined}
+                hasQuote={
+                  currentImage && currentImage.content.quote !== undefined
+                }
                 actions={allActions}
                 active={displayMode}
               />
@@ -137,7 +138,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               images={sanityProject.images}
             />
           )}
-          {displayMode === "gallery" && (
+          {displayMode === "gallery" && currentImage && (
             <GalleryView
               index={galleryImage}
               currentImage={currentImage}
