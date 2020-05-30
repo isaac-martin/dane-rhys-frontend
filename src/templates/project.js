@@ -26,6 +26,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const [displayMode, setDisplayMode] = useState("indexView")
   const [galleryImage, setGalleryImage] = useState(0)
   const [isQuoteActive, setIsQuoteActive] = useState(false)
+  const [isInfoActive, setInfoActive] = useState(false)
 
   const imageArr = buildImageData(sanityProject)
   const currentImage = imageArr[galleryImage]
@@ -49,38 +50,35 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const actions = {
     index: {
       label: "Index",
-      key: "indexView",
       onClick: () => {
         setDisplayMode("indexView")
         setIsQuoteActive(false)
+        setInfoActive(false)
       },
+      isActive: displayMode === "indexView",
     },
     quote: {
       label: "Quote ^",
       onClick: () => setIsQuoteActive(!isQuoteActive),
+      isActive: isQuoteActive,
     },
     gallery: {
       label: "Gallery",
-      key: "gallery",
       onClick: () => {
         setDisplayMode("gallery")
         setIsQuoteActive(false)
+        setInfoActive(false)
       },
+      isActive: displayMode === "gallery",
     },
     info: {
       label: "Project Info",
-      key: "projectInfo",
       onClick: () => {
-        setDisplayMode("projectInfo")
+        setInfoActive(!isInfoActive)
         setIsQuoteActive(false)
       },
+      isActive: isInfoActive,
     },
-  }
-
-  const actionsArrs = {
-    indexView: [actions["gallery"], actions["info"]],
-    gallery: [actions["index"], actions["info"], actions["quote"]],
-    projectInfo: [actions["gallery"], actions["index"]],
   }
 
   const allActions = [
@@ -109,11 +107,14 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               height: "100%",
             }}
           >
-            {displayMode === "gallery" && isQuoteActive && (
-              <Box mt={4}>
+            <Box mt={4}>
+              {displayMode === "gallery" && isQuoteActive && (
                 <BlockContent blocks={currentImage.content.quote} />
-              </Box>
-            )}
+              )}
+              {isInfoActive && (
+                <BlockContent blocks={sanityProject._rawProjectDescription} />
+              )}
+            </Box>
             <Box mt={"auto"}>
               {displayMode === "gallery" && (
                 <Box mb={4}>
@@ -127,6 +128,8 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 }
                 actions={allActions}
                 active={displayMode}
+                isQuoteActive={isQuoteActive}
+                IsInfoActive={isInfoActive}
               />
             </Box>
           </Flex>
@@ -146,9 +149,6 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               decrement={() => paginate(-1)}
               images={sanityProject.images}
             />
-          )}
-          {displayMode === "projectInfo" && (
-            <BlockContent blocks={sanityProject._rawProjectDescription} />
           )}
         </Box>
       </Grid>

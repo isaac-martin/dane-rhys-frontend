@@ -15,8 +15,8 @@ import "./layout.css"
 export const Back = styled(Link)(({ active, theme, size = 16 }) => {
   return {
     color: "black",
-    background: `none`,
-    position: `absolute`,
+    background: theme.colors.background,
+    position: `fixed`,
     border: `none`,
     fontWeight: active ? `bold` : `normal`,
     fontSize: size,

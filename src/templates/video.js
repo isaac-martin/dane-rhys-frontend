@@ -1,14 +1,12 @@
 import React, { useState } from "react"
 import BlockContent from "../components/BlockContent"
-import { Grid, Box, Flex, Embed, Heading } from "theme-ui"
+import { Grid, Box, Flex, Heading } from "theme-ui"
 import Layout from "../components/layout"
 
 import { graphql } from "gatsby"
 import { useThemeUI } from "theme-ui"
 
 const VideoTemplate = ({ data: { sanityVideoProject } }) => {
-  const [displayMode, setDisplayMode] = useState("video")
-
   const {
     theme: { space },
   } = useThemeUI()
@@ -46,23 +44,16 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
               height: "100%",
             }}
           >
-            {displayMode === "video" && (
-              <Box className="video-responsive">
-                <iframe
-                  src={`https://player.vimeo.com/video/${sanityVideoProject.vimeoId}`}
-                  frameborder="0"
-                  title="{video_title}"
-                  webkitallowfullscreen
-                  mozallowfullscreen
-                  allowfullscreen
-                ></iframe>
-              </Box>
-            )}
-            {displayMode === "projectInfo" && (
-              <BlockContent
-                blocks={sanityVideoProject._rawProjectDescription}
-              />
-            )}
+            <Box className="video-responsive">
+              <iframe
+                src={`https://player.vimeo.com/video/${sanityVideoProject.vimeoId}`}
+                frameborder="0"
+                title="{video_title}"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+              ></iframe>
+            </Box>
           </Flex>
         </Box>
       </Grid>

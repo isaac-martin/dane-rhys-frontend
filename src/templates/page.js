@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import BlockContent from "../components/BlockContent"
 import { Grid, Box } from "theme-ui"
 import { graphql } from "gatsby"

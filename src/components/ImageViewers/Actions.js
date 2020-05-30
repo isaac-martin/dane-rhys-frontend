@@ -1,6 +1,9 @@
 import React from "react"
+/** @jsx jsx */
+import { jsx } from "theme-ui"
 import styled from "@emotion/styled"
 import { padding, margin } from "polished"
+import { Box } from "theme-ui"
 
 export const Button = styled.button(({ active, theme, size = 16 }) => {
   return {
@@ -20,16 +23,16 @@ const Actions = ({ actions, hasQuote, active }) => {
   }
 
   return (
-    <>
+    <Box sx={{ position: "fixed", bottom: "4", bg: "background" }}>
       {actionsArr.map((action, index) => (
         <>
-          <Button active={action.key === active} onClick={action.onClick}>
+          <Button active={action.isActive} onClick={action.onClick}>
             {action.label}
           </Button>
           {index !== actionsArr.length - 1 && "/"}
         </>
       ))}
-    </>
+    </Box>
   )
 }
 

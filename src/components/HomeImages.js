@@ -25,10 +25,12 @@ const MainMenu = () => {
     theme: { space },
   } = useThemeUI()
 
+  const imagesRandom = images.sort(() => Math.random() - 0.5).slice(0, 3)
+
   return (
     <Box
       css={{
-        width: 400,
+        width: "34vh",
         overflow: `hidden`,
         height: `calc(100vh + ${space[4]}px)`,
         transform: `translateY(-${space[4]}px)`,
@@ -41,7 +43,7 @@ const MainMenu = () => {
           flexDirection: `column`,
         }}
       >
-        {images.map(img => (
+        {imagesRandom.map(img => (
           <Img
             style={{ width: "100%", marginBottom: space[2] }}
             imgStyle={{ objectFit: "contain" }}
