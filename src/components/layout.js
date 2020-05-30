@@ -20,8 +20,11 @@ export const Back = styled(Link)(({ active, theme, size = 16 }) => {
     border: `none`,
     fontWeight: active ? `bold` : `normal`,
     fontSize: size,
-    ...padding(0, theme.space[1]),
+    ...padding(theme.space[4], 0, theme.space[3]),
     ...margin(0),
+    width: "100%",
+    top: 0,
+    zIndex: 9,
   }
 })
 

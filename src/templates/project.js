@@ -59,7 +59,10 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     },
     quote: {
       label: "Quote ^",
-      onClick: () => setIsQuoteActive(!isQuoteActive),
+      onClick: () => {
+        setIsQuoteActive(!isQuoteActive)
+        setInfoActive(false)
+      },
       isActive: isQuoteActive,
     },
     gallery: {
@@ -92,14 +95,12 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     theme: { space },
   } = useThemeUI()
 
+  const textWidth = 350
+
   return (
     <Layout showBackBtn>
-      <Grid
-        css={{ height: "100%", maxHeight: "100vh" }}
-        gap={2}
-        columns={[2, "2fr 5fr"]}
-      >
-        <Box css={{ maxHeight: `calc(100vh - ${2 * space[4]}px)` }}>
+      <Grid gap={4} columns={[2, "350px 1fr"]}>
+        <Box css={{ height: `calc(100vh - ${2 * space[4]}px)` }}>
           <Flex
             sx={{
               flexDirection: "column",
@@ -107,34 +108,46 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               height: "100%",
             }}
           >
-            <Box mt={4}>
-              {displayMode === "gallery" && isQuoteActive && (
-                <BlockContent blocks={currentImage.content.quote} />
-              )}
-              {isInfoActive && (
-                <BlockContent blocks={sanityProject._rawProjectDescription} />
-              )}
-            </Box>
-            <Box mt={"auto"}>
-              {displayMode === "gallery" && (
-                <Box mb={4}>
-                  <BlockContent blocks={currentImage.content.desc} />
-                </Box>
-              )}
+            <Box
+              css={{
+                width: textWidth,
+                position: "fixed",
+                overflow: "scroll",
+                height: `89vh`,
+                paddingBottom: "30px",
+              }}
+            >
+              <Box mt={5} mb={5} pr={2}>
+                {displayMode === "gallery" && isQuoteActive && (
+                  <BlockContent blocks={currentImage.content.quote} />
+                )}
+                {isInfoActive && (
+                  <BlockContent blocks={sanityProject._rawProjectDescription} />
+                )}
+              </Box>
+              <Box css={{ position: "absolute", bottom: 0 }}>
+                {displayMode === "gallery" && (
+                  <Box mb={4}>
+                    <BlockContent blocks={currentImage.content.desc} />
+                  </Box>
+                )}
 
-              <Actions
-                hasQuote={
-                  currentImage && currentImage.content.quote !== undefined
-                }
-                actions={allActions}
-                active={displayMode}
-                isQuoteActive={isQuoteActive}
-                IsInfoActive={isInfoActive}
-              />
+                <Actions
+                  hasQuote={
+                    displayMode === "gallery" &&
+                    currentImage &&
+                    currentImage.content.quote !== undefined
+                  }
+                  actions={allActions}
+                  active={displayMode}
+                  isQuoteActive={isQuoteActive}
+                  IsInfoActive={isInfoActive}
+                />
+              </Box>
             </Box>
           </Flex>
         </Box>
-        <Box css={{ maxHeight: `calc(100vh - 64px)` }}>
+        <Box css={{ zIndex: 99 }}>
           {displayMode === "indexView" && (
             <IndexView
               jumpToImage={jumpToImage}

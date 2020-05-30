@@ -51,6 +51,7 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           style={{
             width: `100%`,
             position: `absolute`,
+            display: "flex",
             top: 0,
             left: 0,
             right: 0,
@@ -82,7 +83,7 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           // }}
         >
           <Img
-            style={{ maxHeight: "100%" }}
+            style={{ maxHeight: "100%", flex: 1 }}
             imgStyle={{ objectFit: "contain" }}
             fluid={currentImage.image.asset.fluid}
           />

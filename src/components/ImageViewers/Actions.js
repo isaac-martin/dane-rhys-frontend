@@ -16,9 +16,10 @@ export const Button = styled.button(({ active, theme, size = 16 }) => {
   }
 })
 
-const Actions = ({ actions, hasQuote, active }) => {
+const Actions = ({ actions, hasQuote }) => {
   let actionsArr = actions
-  if (actions.some(action => action.label.includes("Quote")) && !hasQuote) {
+
+  if (!hasQuote) {
     actionsArr = actions.filter(action => !action.label.includes("Quote"))
   }
 
