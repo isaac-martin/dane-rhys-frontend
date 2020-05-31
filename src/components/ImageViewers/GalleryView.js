@@ -1,5 +1,7 @@
 import React, { useEffect } from "react"
-import { Flex } from "theme-ui"
+import { Flex, Button } from "theme-ui"
+// @jsx jsx
+import { jsx } from "theme-ui"
 
 import { motion, AnimatePresence } from "framer-motion"
 import Img from "gatsby-image"
@@ -24,7 +26,6 @@ const variants = {
 
 const GalleryView = ({ currentImage, increment, decrement, index }) => {
   const arrowListener = ({ key }) => {
-    console.log(key)
     if (key === "ArrowRight") {
       increment()
     }
@@ -82,6 +83,40 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           //   }
           // }}
         >
+          <button
+            onClick={decrement}
+            css={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              bottom: 0,
+              width: "50%",
+              cursor: "w-resize",
+              zIndex: 99,
+              background: `none`,
+              border: `none`,
+              "::focus": {
+                outline: `none`,
+              },
+            }}
+          />
+          <button
+            onClick={increment}
+            css={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              bottom: 0,
+              width: "50%",
+              cursor: "e-resize",
+              zIndex: 99,
+              background: `none`,
+              border: `none`,
+              "::focus": {
+                outline: `none`,
+              },
+            }}
+          />
           <Img
             style={{ maxHeight: "100%", flex: 1 }}
             imgStyle={{ objectFit: "contain" }}
