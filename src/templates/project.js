@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-// import Img from "gatsby-image"
+// @jsx jsx
+import { jsx } from "theme-ui"
 import BlockContent from "../components/BlockContent"
 import { Grid, Box, Flex } from "theme-ui"
 
@@ -34,6 +35,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const jumpToImage = image => {
     setGalleryImage(image)
     setDisplayMode("gallery")
+    setInfoActive(false)
   }
 
   const paginate = direction => {
@@ -68,9 +70,9 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     gallery: {
       label: "Gallery",
       onClick: () => {
+        setInfoActive(false)
         setDisplayMode("gallery")
         setIsQuoteActive(false)
-        setInfoActive(false)
       },
       isActive: displayMode === "gallery",
     },
@@ -119,16 +121,34 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
             >
               <Box mt={5} mb={5} pr={2}>
                 {displayMode === "gallery" && isQuoteActive && (
-                  <BlockContent blocks={currentImage.content.quote} />
+                  <BlockContent
+                    fontFamily="desc"
+                    blocks={currentImage.content.quote}
+                  />
                 )}
                 {isInfoActive && (
                   <BlockContent blocks={sanityProject._rawProjectDescription} />
                 )}
               </Box>
-              <Box css={{ position: "absolute", bottom: 0 }}>
-                {displayMode === "gallery" && (
-                  <Box mb={4}>
-                    <BlockContent blocks={currentImage.content.desc} />
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  background: "bodybg",
+                }}
+              >
+                {displayMode === "gallery" && !isInfoActive && (
+                  <Box
+                    className="noMb"
+                    sx={{ textTransform: "uppercase" }}
+                    mb={4}
+                  >
+                    <BlockContent
+                      fontFamily="desc"
+                      blocks={currentImage.content.desc}
+                    />
                   </Box>
                 )}
 
@@ -158,8 +178,14 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
             <GalleryView
               index={galleryImage}
               currentImage={currentImage}
-              increment={() => paginate(1)}
-              decrement={() => paginate(-1)}
+              increment={() => {
+                paginate(1)
+                setInfoActive(false)
+              }}
+              decrement={() => {
+                paginate(-1)
+                setInfoActive(false)
+              }}
               images={sanityProject.images}
             />
           )}

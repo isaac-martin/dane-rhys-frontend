@@ -3,13 +3,17 @@ import Link from "../Link"
 import { Box, Flex } from "theme-ui"
 import styled from "@emotion/styled"
 
-export const MenuHeading = styled.h3(({ theme }) => ({
+const headingStyle = theme => ({
   fontSize: 18,
   fontWeight: `bold`,
   letterSpacing: "0.1em",
   textTransform: "uppercase",
   color: "black",
   textDecoration: `none`,
+})
+
+export const MenuHeading = styled.h3(({ theme }) => ({
+  ...headingStyle(),
 }))
 
 export const MenuItem = styled(Link)(({ theme }) => ({
@@ -26,12 +30,13 @@ export const MenuItem = styled(Link)(({ theme }) => ({
   },
 }))
 
-const HeadingLink = styled(MenuHeading)(({}) => ({
+const HeadingLink = styled(Link)(({}) => ({
+  ...headingStyle(),
   ":hover": {
     color: "blue",
     cursor: "pointer",
   },
-})).withComponent(Link)
+}))
 
 const SubMenu = ({ data: { title, titleLink, menuItems } }) => {
   return (
@@ -39,12 +44,12 @@ const SubMenu = ({ data: { title, titleLink, menuItems } }) => {
       <nav>
         <Flex sx={{ flexDirection: "column", alignItems: `center` }}>
           {titleLink ? (
-            <HeadingLink to={titleLink.current}>{title}</HeadingLink>
+            <HeadingLink to={`/${titleLink.slug.current}`}>{title}</HeadingLink>
           ) : (
             <MenuHeading>{title}</MenuHeading>
           )}
           {menuItems.map(item => (
-            <MenuItem to={item.url ? item.url : item.slug.current}>
+            <MenuItem to={item.url ? item.url : `/${item.slug.current}`}>
               {item.title}
             </MenuItem>
           ))}

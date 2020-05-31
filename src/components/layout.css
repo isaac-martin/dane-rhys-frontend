@@ -60,3 +60,14 @@ table {
 .lock-body-scroll {
 overflow: hidden;
 }
+
+strong {
+font-weight: bold;
+}
+ p {
+ margin-bottom: 20px;
+ }
+
+ .noMb p {
+ margin-bottom: 0;
+ }

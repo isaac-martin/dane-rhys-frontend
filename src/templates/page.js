@@ -1,6 +1,6 @@
 import React from "react"
 import BlockContent from "../components/BlockContent"
-import { Grid, Box } from "theme-ui"
+import { Flex, Box } from "theme-ui"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,11 +9,11 @@ const PageTemplate = ({ data: { sanityPage } }) => {
   return (
     <Layout showBackBtn>
       <SEO title={sanityPage.title} />
-      <Grid gap={2} columns={[1, "1fr"]}>
-        <Box>
+      <Flex pt={5} pb={4} css={{ justifyContent: "center" }}>
+        <Box css={{ maxWidth: "60ch" }}>
           <BlockContent blocks={sanityPage._rawPageContent} />
         </Box>
-      </Grid>
+      </Flex>
     </Layout>
   )
 }

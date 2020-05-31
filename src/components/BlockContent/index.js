@@ -1,23 +1,44 @@
 import BaseBlockContent from "@sanity/block-content-to-react"
+// @jsx jsx
+import { jsx } from "theme-ui"
+import { Box, Heading } from "theme-ui"
 import React from "react"
 const serializers = {
   types: {
     block(props) {
       switch (props.node.style) {
         case "h1":
-          return <h1>{props.children}</h1>
+          return (
+            <Heading mb={2} as="h1">
+              {props.children}
+            </Heading>
+          )
 
         case "h2":
-          return <h2>{props.children}</h2>
+          return (
+            <Heading mb={2} as="h2">
+              {props.children}
+            </Heading>
+          )
 
         case "h3":
-          return <h3>{props.children}</h3>
+          return (
+            <Heading mb={2} as="h3">
+              {props.children}
+            </Heading>
+          )
 
         case "h4":
-          return <h4>{props.children}</h4>
+          return (
+            <Heading mb={2} as="h4">
+              {props.children}
+            </Heading>
+          )
 
         case "blockquote":
           return <blockquote>{props.children}</blockquote>
+        case "span":
+          return <span>{props.children}</span>
 
         default:
           return <p>{props.children}</p>
@@ -26,8 +47,13 @@ const serializers = {
   },
 }
 
-const BlockContent = ({ blocks }) => (
-  <BaseBlockContent blocks={blocks} serializers={serializers} />
-)
+const BlockContent = ({ blocks, fontFamily }) => {
+  console.log(blocks)
+  return (
+    <Box sx={{ fontFamily }}>
+      <BaseBlockContent blocks={blocks} serializers={serializers} />
+    </Box>
+  )
+}
 
 export default BlockContent

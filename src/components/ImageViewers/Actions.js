@@ -27,7 +27,11 @@ const Actions = ({ actions, hasQuote }) => {
     <Box sx={{ position: "fixed", bottom: "4", bg: "background" }}>
       {actionsArr.map((action, index) => (
         <>
-          <Button active={action.isActive} onClick={action.onClick}>
+          <Button
+            title={action.label}
+            active={action.isActive}
+            onClick={action.onClick}
+          >
             {action.label}
           </Button>
           {index !== actionsArr.length - 1 && "/"}
