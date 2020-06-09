@@ -26,14 +26,14 @@ export const MenuItem = styled(Link)(({ theme }) => ({
   textDecoration: `none`,
   marginTop: theme.space[2],
   ":hover": {
-    color: "blue",
+    color: theme.colors.primary,
   },
 }))
 
-const HeadingLink = styled(Link)(({}) => ({
+const HeadingLink = styled(Link)(({ theme }) => ({
   ...headingStyle(),
   ":hover": {
-    color: "blue",
+    color: theme.colors.primary,
     cursor: "pointer",
   },
 }))

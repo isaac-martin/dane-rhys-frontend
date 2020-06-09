@@ -5,8 +5,13 @@ export default {
   fonts: {
     ...base.fonts,
     desc: `"Courier New", Courier, monospace`,
+    body: `Helvetica Neue,Helvetica,Arial,sans-serif`,
   },
   styles: {
     ...base.styles,
+  },
+  colors: {
+    ...base.colors,
+    primary: "#0061c9",
   },
 }

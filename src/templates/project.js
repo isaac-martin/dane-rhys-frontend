@@ -101,8 +101,8 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
 
   return (
     <Layout showBackBtn>
-      <Grid gap={4} columns={[2, "350px 1fr"]}>
-        <Box css={{ height: `calc(100vh - ${2 * space[4]}px)` }}>
+      <Grid gap={4} columns={["auto", "350px 1fr"]}>
+        <Box css={{ height: [0, 0, `calc(100vh - ${2 * space[4]}px)`] }}>
           <Flex
             sx={{
               flexDirection: "column",
@@ -111,15 +111,30 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
             }}
           >
             <Box
-              css={{
-                width: textWidth,
+              sx={{
+                width: ["calc(100% - 64px)", "100%", textWidth],
                 position: "fixed",
                 overflow: "scroll",
-                height: `89vh`,
+                height: [
+                  isQuoteActive || isInfoActive ? `100vh` : `auto`,
+                  `95vh`,
+                  `89vh`,
+                ],
                 paddingBottom: "30px",
+                zIndex: 999,
+                bg: ["transparent", "background", "transparent"],
               }}
             >
-              <Box mt={5} mb={5} pr={2}>
+              <Box
+                sx={{
+                  bg: "background",
+                  height: isQuoteActive || isInfoActive ? "95%" : "auto",
+                }}
+                mt={[0, 0, 5]}
+                mb={4}
+                pr={[0, 0, 2]}
+                pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
+              >
                 {displayMode === "gallery" && isQuoteActive && (
                   <BlockContent
                     fontFamily="desc"
@@ -136,7 +151,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                   bottom: 0,
                   right: 0,
                   left: 0,
-                  background: "bodybg",
+                  bgcol: "bodybg",
                 }}
               >
                 {displayMode === "gallery" && !isInfoActive && (
@@ -167,7 +182,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
             </Box>
           </Flex>
         </Box>
-        <Box css={{ zIndex: 99 }}>
+        <Box css={{ height: "90vh", zIndex: 99 }}>
           {displayMode === "indexView" && (
             <IndexView
               jumpToImage={jumpToImage}

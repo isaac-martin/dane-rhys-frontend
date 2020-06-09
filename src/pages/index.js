@@ -14,7 +14,7 @@ const IndexPage = () => (
       <Grid
         css={{ height: "100%", maxHeight: "100vh" }}
         gap={2}
-        columns={[2, "1fr 1fr"]}
+        columns={["auto", "1fr 1fr"]}
       >
         <Flex sx={{ flexDirection: "column", alignItems: `center` }}>
           <Heading
@@ -22,7 +22,7 @@ const IndexPage = () => (
             sx={{
               letterSpacing: `0.2em`,
               textTransform: "uppercase",
-              fontSize: 6,
+              fontSize: [5, 5, 6],
               mb: 5,
               mt: 2,
             }}

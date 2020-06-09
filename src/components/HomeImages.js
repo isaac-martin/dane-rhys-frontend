@@ -30,13 +30,14 @@ const MainMenu = () => {
   return (
     <Box
       pl={5}
-      css={{
+      sx={{
         width: "34vh",
         overflow: `hidden`,
         height: `calc(100vh + ${space[4]}px)`,
         transform: `translateY(-${space[4]}px)`,
         flexDirection: `column`,
         boxSizing: `content-box`,
+        display: ["none", "block", "block"],
       }}
     >
       <Flex

@@ -4,6 +4,16 @@ import { jsx } from "theme-ui"
 import { Box, Heading } from "theme-ui"
 import React from "react"
 const serializers = {
+  marks: {
+    link: ({ mark, children }) => {
+      return (
+        <a sx={{ textDecoration: "underline", color: "text" }} href={mark.href}>
+          {children}
+        </a>
+      )
+    },
+  },
+
   types: {
     block(props) {
       switch (props.node.style) {
@@ -40,6 +50,9 @@ const serializers = {
         case "span":
           return <span>{props.children}</span>
 
+        case "link":
+          return <a id="test">{props.children}</a>
+
         default:
           return <p>{props.children}</p>
       }
@@ -48,7 +61,6 @@ const serializers = {
 }
 
 const BlockContent = ({ blocks, fontFamily }) => {
-  console.log(blocks)
   return (
     <Box sx={{ fontFamily }}>
       <BaseBlockContent blocks={blocks} serializers={serializers} />

@@ -24,7 +24,7 @@ export const Back = styled(Link)(({ active, theme, size = 16 }) => {
     ...margin(0),
     width: "100%",
     top: 0,
-    zIndex: 9,
+    zIndex: 9999,
     "::focus": {
       outline: `none`,
     },

@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const PageTemplate = ({ data: { sanityPage } }) => {
+  console.log(sanityPage._rawPageContent)
   return (
     <Layout showBackBtn>
       <SEO title={sanityPage.title} />

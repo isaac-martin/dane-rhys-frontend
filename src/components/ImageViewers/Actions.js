@@ -24,7 +24,16 @@ const Actions = ({ actions, hasQuote }) => {
   }
 
   return (
-    <Box sx={{ position: "fixed", bottom: "4", bg: "background" }}>
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: ["0", "1", "4"],
+        bg: "background",
+        width: "100%",
+        pb: ["3", "0", "0"],
+        pt: ["3", "0", "0"],
+      }}
+    >
       {actionsArr.map((action, index) => (
         <>
           <Button
