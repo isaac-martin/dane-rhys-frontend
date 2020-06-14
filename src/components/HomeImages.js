@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Grid, Box, Flex } from "theme-ui"
+import { Box, Flex } from "theme-ui"
 import { useThemeUI } from "theme-ui"
 import Img from "gatsby-image"
 

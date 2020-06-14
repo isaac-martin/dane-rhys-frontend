@@ -50,9 +50,6 @@ const serializers = {
         case "span":
           return <span>{props.children}</span>
 
-        case "link":
-          return <a id="test">{props.children}</a>
-
         default:
           return <p>{props.children}</p>
       }

@@ -143,9 +143,4 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
   )
 }
 
-const swipeConfidenceThreshold = 100
-const swipePower = (offset, velocity) => {
-  return Math.abs(offset) * velocity
-}
-
 export default GalleryView

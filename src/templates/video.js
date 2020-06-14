@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import BlockContent from "../components/BlockContent"
 import { Grid, Box, Flex, Heading } from "theme-ui"
 import Layout from "../components/layout"
@@ -16,12 +16,9 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
     <Layout showBackBtn>
       <SEO
         title={sanityVideoProject.title}
-        image={
-          socialSharing && sanityVideoProject.socialSharing.image.asset.url
-        }
+        image={socialSharing && socialSharing.image.asset.url}
         description={
-          socialSharing &&
-          sanityVideoProject._rawSocialSharing.text[0].children[0].text
+          socialSharing && _rawSocialSharing.text[0].children[0].text
         }
       />
       <Grid

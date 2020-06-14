@@ -29,7 +29,6 @@ const Actions = ({ actions, hasQuote, textWidth }) => {
         position: "fixed",
         bottom: ["0", "1", "4"],
         bg: "background",
-        width: "100%",
         pb: ["3", "0", "0"],
         pt: ["3", "0", "0"],
         width: textWidth,
