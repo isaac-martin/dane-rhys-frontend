@@ -73,6 +73,10 @@ function SEO({ description, lang, meta, title, image }) {
           name: `og:image`,
           content: ogImage,
         },
+        {
+          name: `twitter:image`,
+          content: ogImage,
+        },
       ].concat(meta)}
     />
   )
