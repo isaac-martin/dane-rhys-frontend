@@ -14,7 +14,12 @@ const IndexView = ({ images, jumpToImage }) => {
     >
       {images.map((image, index) => (
         <Box css={{ cursor: "crosshair" }} onClick={() => jumpToImage(index)}>
-          <Img fluid={image.image.asset.fluid} />
+          <Img
+            imgStyle={{
+              objectFit: "contain",
+            }}
+            fluid={image.image.asset.fluid}
+          />
         </Box>
       ))}
     </Grid>

@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Dane Rhys photography`,
+    description: `Dane Rhys is a New York-based photographer and producer. He documents the people and workspaces in America with a focus on the aging workforce, de-industrialization of America and the rapidly changing energy sector.`,
+    author: `@suprisaac`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

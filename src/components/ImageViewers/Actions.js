@@ -16,7 +16,7 @@ export const Button = styled.button(({ active, theme, size = 16 }) => {
   }
 })
 
-const Actions = ({ actions, hasQuote }) => {
+const Actions = ({ actions, hasQuote, textWidth }) => {
   let actionsArr = actions
 
   if (!hasQuote) {
@@ -32,6 +32,7 @@ const Actions = ({ actions, hasQuote }) => {
         width: "100%",
         pb: ["3", "0", "0"],
         pt: ["3", "0", "0"],
+        width: textWidth,
       }}
     >
       {actionsArr.map((action, index) => (

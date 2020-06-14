@@ -157,7 +157,10 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 {displayMode === "gallery" && !isInfoActive && (
                   <Box
                     className="noMb"
-                    sx={{ textTransform: "uppercase" }}
+                    sx={{
+                      textTransform: "uppercase",
+                      display: ["none", "inherit", "inherit"],
+                    }}
                     mb={4}
                   >
                     <BlockContent
@@ -168,6 +171,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 )}
 
                 <Actions
+                  textWidth={textWidth}
                   hasQuote={
                     displayMode === "gallery" &&
                     currentImage &&

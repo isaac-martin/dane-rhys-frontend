@@ -14,4 +14,5 @@ export default {
     ...base.colors,
     primary: "#0061c9",
   },
+  textWidth: 350,
 }

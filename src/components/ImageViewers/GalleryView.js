@@ -1,7 +1,10 @@
 import React, { useEffect } from "react"
-import { Flex, Button } from "theme-ui"
+import { Flex, Box } from "theme-ui"
+import { useSwipeable } from "react-swipeable"
+
 // @jsx jsx
 import { jsx } from "theme-ui"
+import BlockContent from "../BlockContent"
 
 import { motion, AnimatePresence } from "framer-motion"
 import Img from "gatsby-image"
@@ -40,12 +43,21 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
       document.removeEventListener("keydown", arrowListener)
     }
   })
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => decrement(),
+    onSwipedRight: () => increment(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  })
+
   return (
     <Flex
       css={{
         position: "relative",
         height: `100%`,
       }}
+      {...handlers}
     >
       <AnimatePresence custom={index}>
         <motion.div
@@ -57,6 +69,7 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
             left: 0,
             right: 0,
             bottom: 0,
+            flexDirection: "column",
           }}
           key={index}
           custom={index}
@@ -64,28 +77,13 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           initial="enter"
           animate="center"
           exit="exit"
-          // drag="x"
           transition={{
             opacity: { duration: 0.5 },
           }}
-          // dragConstraints={{ left: 0, right: 0 }}
-          // dragElastic={1}
-          // onDragEnd={(e, { offset, velocity }) => {
-          //   // console.log("drag")
-          //   console.log(offset.x, velocity)
-          //   const swipe = swipePower(offset.x, velocity.x)
-          //   // console.log(swipe)
-
-          //   if (swipe < -swipeConfidenceThreshold) {
-          //     increment()
-          //   } else if (swipe > swipeConfidenceThreshold) {
-          //     decerement()
-          //   }
-          // }}
         >
           <button
             onClick={decrement}
-            css={{
+            sx={{
               position: "absolute",
               left: 0,
               top: 0,
@@ -95,14 +93,16 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
               zIndex: 99,
               background: `none`,
               border: `none`,
-              "::focus": {
+              ":focus": {
                 outline: `none`,
               },
+              outline: "none",
+              display: ["none", "inherit", "inherit"],
             }}
           />
           <button
             onClick={increment}
-            css={{
+            sx={{
               position: "absolute",
               right: 0,
               top: 0,
@@ -112,9 +112,11 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
               zIndex: 99,
               background: `none`,
               border: `none`,
-              "::focus": {
+              ":focus": {
                 outline: `none`,
               },
+              outline: "none",
+              display: ["none", "inherit", "inherit"],
             }}
           />
           <Img
@@ -122,6 +124,19 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
             imgStyle={{ objectFit: "contain" }}
             fluid={currentImage.image.asset.fluid}
           />
+          <Box
+            className="noMb"
+            sx={{
+              textTransform: "uppercase",
+              display: ["inherit", "none", "none"],
+            }}
+            mb={4}
+          >
+            <BlockContent
+              fontFamily="desc"
+              blocks={currentImage.content.desc}
+            />
+          </Box>
         </motion.div>
       </AnimatePresence>
     </Flex>
