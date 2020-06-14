@@ -16,7 +16,7 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
       <Grid
         css={{ height: "100%", maxHeight: "100vh" }}
         gap={2}
-        columns={[2, "1fr 2fr"]}
+        columns={[1, "1fr 2fr"]}
       >
         <Box css={{ maxHeight: `calc(100vh - ${2 * space[4]}px)` }}>
           <Flex
