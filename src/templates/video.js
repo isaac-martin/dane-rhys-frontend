@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 
 import { graphql } from "gatsby"
 import { useThemeUI } from "theme-ui"
+import SEO from "../components/seo"
 
 const VideoTemplate = ({ data: { sanityVideoProject } }) => {
   const {
@@ -13,6 +14,11 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
 
   return (
     <Layout showBackBtn>
+      <SEO
+        title={sanityVideoProject.title}
+        image={sanityVideoProject.socialSharing.image.asset.url}
+        description={sanityVideoProject._rawSocialSharing.text.children.text}
+      />
       <Grid
         css={{ height: "100%", maxHeight: "100vh" }}
         gap={2}
@@ -75,6 +81,14 @@ export const projectData = graphql`
           }
         }
       }
+      socialSharing {
+        image {
+          asset {
+            url
+          }
+        }
+      }
+      _rawSocialSharing
     }
   }
 `

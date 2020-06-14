@@ -11,6 +11,7 @@ import Layout from "../components/layout"
 
 import { graphql } from "gatsby"
 import { useThemeUI } from "theme-ui"
+import SEO from "../components/seo"
 
 const buildImageData = project => {
   const { images, _rawImages } = project
@@ -94,13 +95,17 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   ]
 
   const {
-    theme: { space },
+    theme: { space, textWidth },
   } = useThemeUI()
-
-  const textWidth = 350
 
   return (
     <Layout showBackBtn>
+      <SEO
+        title={sanityProject.title}
+        image={sanityProject.socialSharing.image.asset.url}
+        description={sanityProject._rawSocialSharing.text.children.text}
+      />
+
       <Grid gap={4} columns={["auto", "350px 1fr"]}>
         <Box css={{ height: [0, 0, `calc(100vh - ${2 * space[4]}px)`] }}>
           <Flex
@@ -229,6 +234,14 @@ export const projectData = graphql`
           }
         }
       }
+      socialSharing {
+        image {
+          asset {
+            url
+          }
+        }
+      }
+      _rawSocialSharing
     }
   }
 `
