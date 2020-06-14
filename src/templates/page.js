@@ -6,12 +6,16 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const PageTemplate = ({ data: { sanityPage } }) => {
+  const { socialSharing, _rawSocialSharing } = sanityPage
+
   return (
     <Layout showBackBtn>
       <SEO
         title={sanityPage.title}
-        image={sanityPage.socialSharing.image.asset.url}
-        description={sanityPage._rawSocialSharing.text.children.text}
+        image={socialSharing && socialSharing.image.asset.url}
+        description={
+          socialSharing && _rawSocialSharing.text[0].children[0].text
+        }
       />
       <Flex pt={5} pb={4} css={{ justifyContent: "center" }}>
         <Box css={{ maxWidth: "60ch" }}>

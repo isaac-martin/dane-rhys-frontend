@@ -98,12 +98,15 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     theme: { space, textWidth },
   } = useThemeUI()
 
+  const { socialSharing, _rawSocialSharing } = sanityProject
   return (
     <Layout showBackBtn>
       <SEO
         title={sanityProject.title}
-        image={sanityProject.socialSharing.image.asset.url}
-        description={sanityProject._rawSocialSharing.text.children.text}
+        image={socialSharing && socialSharing.image.asset.url}
+        description={
+          socialSharing && _rawSocialSharing.text[0].children[0].text
+        }
       />
 
       <Grid gap={4} columns={["auto", "350px 1fr"]}>

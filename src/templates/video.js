@@ -11,13 +11,18 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
   const {
     theme: { space },
   } = useThemeUI()
-
+  const { socialSharing, _rawSocialSharing } = sanityVideoProject
   return (
     <Layout showBackBtn>
       <SEO
         title={sanityVideoProject.title}
-        image={sanityVideoProject.socialSharing.image.asset.url}
-        description={sanityVideoProject._rawSocialSharing.text.children.text}
+        image={
+          socialSharing && sanityVideoProject.socialSharing.image.asset.url
+        }
+        description={
+          socialSharing &&
+          sanityVideoProject._rawSocialSharing.text[0].children[0].text
+        }
       />
       <Grid
         css={{ height: "100%", maxHeight: "100vh" }}

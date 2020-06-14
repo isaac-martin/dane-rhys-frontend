@@ -30,8 +30,8 @@ function SEO({ description, lang, meta, title, image }) {
   )
 
   const metaDescription =
-    description || sanitySiteSettings._rawSocial.text.children.text
-  const ogImage = image || sanitySiteSettings.image.asset.url
+    description || sanitySiteSettings._rawSocial.text[0].children[0].text
+  const ogImage = image || sanitySiteSettings.social.image.asset.url
   const pageTitle = title || sanitySiteSettings.title
   return (
     <Helmet
