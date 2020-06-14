@@ -130,7 +130,8 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
               textTransform: "uppercase",
               display: ["inherit", "none", "none"],
             }}
-            mb={4}
+            pb={5}
+            pt={1}
           >
             <BlockContent
               fontFamily="desc"
