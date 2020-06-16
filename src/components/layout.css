@@ -63,7 +63,7 @@ overflow: hidden;
 }
 
 strong {
-font-weight: bold;
+font-weight: 500;
 }
  p {
  margin-bottom: 20px;
@@ -71,9 +71,18 @@ font-weight: bold;
 
  .noMb p {
  margin-bottom: 0;
+ font-weight: 300;
  }
 
 ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+ul {
+list-style-type: initial;
+}
+
+li {
+margin-bottom: 5px;
 }

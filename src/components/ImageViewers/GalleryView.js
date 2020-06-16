@@ -127,7 +127,7 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           <Box
             className="noMb"
             sx={{
-              textTransform: "uppercase",
+              // textTransform: "uppercase",
               display: ["inherit", "none", "none"],
             }}
             pb={5}

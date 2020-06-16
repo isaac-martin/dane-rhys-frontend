@@ -4,7 +4,8 @@ export default {
   ...base,
   fonts: {
     ...base.fonts,
-    desc: `"Courier New", Courier, monospace`,
+    // desc: `"Courier New", Courier, monospace`,
+    desc: `Helvetica Neue,Helvetica,Arial,sans-serif`,
     body: `Helvetica Neue,Helvetica,Arial,sans-serif`,
   },
   styles: {

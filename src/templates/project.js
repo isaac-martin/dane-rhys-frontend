@@ -166,7 +166,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                   <Box
                     className="noMb"
                     sx={{
-                      textTransform: "uppercase",
+                      // textTransform: "uppercase",
                       display: ["none", "inherit", "inherit"],
                     }}
                     mb={4}
