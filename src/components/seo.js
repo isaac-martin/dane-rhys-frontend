@@ -54,12 +54,16 @@ function SEO({ description, lang, meta, title, image }) {
           content: metaDescription,
         },
         {
+          name: `og:image`,
+          content: ogImage,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:title`,
@@ -69,10 +73,7 @@ function SEO({ description, lang, meta, title, image }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-        {
-          name: `og:image`,
-          content: ogImage,
-        },
+
         {
           name: `twitter:image`,
           content: ogImage,
