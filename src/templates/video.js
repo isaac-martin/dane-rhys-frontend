@@ -36,7 +36,10 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
           >
             <Box css={{ marginTop: "auto" }}>
               <Heading mb={4}>{sanityVideoProject.title}</Heading>
-              <Box className="noMb" mb={4}>
+              <Box
+                // className="noMb"
+                mb={4}
+              >
                 <BlockContent
                   fontFamily="desc"
                   blocks={sanityVideoProject._rawProjectDescription}

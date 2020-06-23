@@ -125,7 +125,7 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
             fluid={currentImage.image.asset.fluid}
           />
           <Box
-            className="noMb"
+            // className="noMb"
             sx={{
               // textTransform: "uppercase",
               display: ["inherit", "none", "none"],
