@@ -164,7 +164,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               >
                 {displayMode === "gallery" && !isInfoActive && (
                   <Box
-                    className="noMb"
+                    // className="noMb"
                     sx={{
                       // textTransform: "uppercase",
                       display: ["none", "inherit", "inherit"],
