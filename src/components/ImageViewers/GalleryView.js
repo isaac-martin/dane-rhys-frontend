@@ -45,8 +45,8 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
   })
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => decrement(),
-    onSwipedRight: () => increment(),
+    onSwipedRight: () => decrement(),
+    onSwipedLeft: () => increment(),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   })
