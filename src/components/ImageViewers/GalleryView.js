@@ -119,11 +119,17 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
               display: ["none", "inherit", "inherit"],
             }}
           />
-          <Img
-            style={{ maxHeight: "100%", flex: 1 }}
-            imgStyle={{ objectFit: "contain" }}
-            fluid={currentImage.image.asset.fluid}
-          />
+          <Box
+            sx={{ flex: [0, 1, 1], height: "auto", maxHeight: "100%" }}
+            mb={[4, 0, 0]}
+            mt={[4, 0, 0]}
+          >
+            <Img
+              style={{ maxHeight: "100%" }}
+              imgStyle={{ objectFit: "contain" }}
+              fluid={currentImage.image.asset.fluid}
+            />
+          </Box>
           <Box
             // className="noMb"
             sx={{
