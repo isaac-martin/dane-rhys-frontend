@@ -26,7 +26,12 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
         gap={2}
         columns={[1, "1fr 2fr"]}
       >
-        <Box css={{ maxHeight: `calc(100vh - ${2 * space[4]}px)` }}>
+        <Box
+          sx={{
+            maxHeight: `calc(100vh - ${2 * space[4]}px)`,
+            order: [2, 0, 0],
+          }}
+        >
           <Flex
             sx={{
               flexDirection: "column",
@@ -34,7 +39,7 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
               height: "100%",
             }}
           >
-            <Box css={{ marginTop: "auto" }}>
+            <Box sx={{ marginTop: [0, 0, "auto"] }}>
               <Heading mb={4}>{sanityVideoProject.title}</Heading>
               <Box
                 // className="noMb"
@@ -54,6 +59,7 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
               flexDirection: "column",
               justifyContent: "center",
               height: "100%",
+              zIndex: 9999,
             }}
           >
             <Box className="video-responsive">
@@ -61,9 +67,9 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
                 src={`https://player.vimeo.com/video/${sanityVideoProject.vimeoId}`}
                 frameborder="0"
                 title="{video_title}"
-                webkitallowfullscreen
-                mozallowfullscreen
-                allowfullscreen
+                webkitallowfullscreen="true"
+                mozallowfullscreen="true"
+                allowfullscreen="true"
               ></iframe>
             </Box>
           </Flex>
