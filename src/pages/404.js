@@ -1,14 +1,29 @@
 import React from "react"
+import DefaultPage from "../components/Page"
+import Link from "../components/Link"
+import { Heading, Text } from "theme-ui"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-
-const NotFoundPage = () => (
-  <Layout>
-    <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
+const NotFound = () => (
+  <DefaultPage title="404">
+    <Heading
+      as="h2"
+      sx={{
+        letterSpacing: `0.2em`,
+        textTransform: "uppercase",
+        fontSize: [5, 5, 6],
+        mb: 5,
+        mt: 2,
+      }}
+    >
+      Sorry page not found
+    </Heading>
+    <Text>
+      Theres no page at this url.{" "}
+      <Link to="/" style={{ color: "black" }}>
+        Go Home
+      </Link>
+    </Text>
+  </DefaultPage>
 )
 
-export default NotFoundPage
+export default NotFound
