@@ -25,6 +25,7 @@ export const MenuItem = styled(Link)(({ theme }) => ({
   transition: "color .3s ease",
   textDecoration: `none`,
   marginTop: theme.space[2],
+  textAlign: 'center',
   ":hover": {
     color: theme.colors.primary,
   },
