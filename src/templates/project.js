@@ -231,7 +231,7 @@ export const projectData = graphql`
       images {
         image {
           asset {
-            fluid {
+            fluid(maxWidth: 1300) {
               ...GatsbySanityImageFluid
             }
           }

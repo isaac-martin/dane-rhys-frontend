@@ -7,7 +7,11 @@ const serializers = {
   marks: {
     link: ({ mark, children }) => {
       return (
-        <a sx={{ textDecoration: "underline", color: "text" }} href={mark.href}>
+        <a
+          sx={{ textDecoration: "underline", color: "text" }}
+          href={mark.href}
+          target={mark.blank ? "_blank" : "_self"}
+        >
           {children}
         </a>
       )

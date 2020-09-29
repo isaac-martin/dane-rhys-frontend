@@ -128,12 +128,11 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
               style={{ maxHeight: "100%" }}
               imgStyle={{ objectFit: "contain" }}
               fluid={currentImage.image.asset.fluid}
+              max
             />
           </Box>
           <Box
-            // className="noMb"
             sx={{
-              // textTransform: "uppercase",
               display: ["inherit", "none", "none"],
             }}
             pb={5}
