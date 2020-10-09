@@ -3,7 +3,7 @@ import BodyClassName from "react-body-classname"
 import Layout from "../components/layout"
 import MainMenu from "../components/Menu/MainMenu"
 import HomeImages from "../components/HomeImages"
-import DefaultPage from "../components/Page"
+import DefaultPage from "../components/page"
 
 import SEO from "../components/seo"
 import { Grid, Flex, Heading } from "theme-ui"

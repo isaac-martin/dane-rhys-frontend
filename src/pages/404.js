@@ -1,5 +1,5 @@
 import React from "react"
-import DefaultPage from "../components/Page"
+import DefaultPage from "../components/page"
 import Link from "../components/Link"
 import { Heading, Text } from "theme-ui"
 
