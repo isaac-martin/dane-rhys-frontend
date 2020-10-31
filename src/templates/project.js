@@ -126,11 +126,15 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 height: [
                   isQuoteActive || isInfoActive ? `100vh` : `auto`,
                   `95vh`,
-                  `89vh`,
+                  `95vh`,
                 ],
                 paddingBottom: "30px",
                 zIndex: 999,
-                bg: ["transparent", "background", "transparent"],
+                bg: [
+                  isInfoActive || isQuoteActive ? "background" : "transparent",
+                  "background",
+                  "transparent",
+                ],
               }}
             >
               <Box

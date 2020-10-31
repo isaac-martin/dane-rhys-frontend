@@ -63,7 +63,7 @@ const serializers = {
 
 const BlockContent = ({ blocks, fontFamily }) => {
   return (
-    <Box sx={{ fontFamily }}>
+    <Box sx={{ fontFamily, marginBottom: 60 }}>
       <BaseBlockContent blocks={blocks} serializers={serializers} />
     </Box>
   )
