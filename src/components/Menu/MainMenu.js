@@ -75,7 +75,7 @@ const MainMenu = () => {
 
   const subMenus = menu.sanityMenu.menuItems
   return (
-    <section>
+    <section style={{ paddingBottom: 30 }}>
       {subMenus.map(sm => (
         <Submenu data={sm} />
       ))}

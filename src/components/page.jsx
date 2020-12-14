@@ -5,10 +5,11 @@ import BodyClassName from "react-body-classname"
 import Layout from "../components/layout"
 import HomeImages from "../components/HomeImages"
 import SEO from "../components/seo"
-import { Grid, Flex } from "theme-ui"
+import { Grid, Flex, jsx } from "theme-ui"
+// @jsx jsx
 
 const DefaultPage = ({ children, pageTitle }) => (
-  <BodyClassName className="lock-body-scroll">
+  <BodyClassName sx={{overflow: ["scroll", "scroll","hidden"]}}>
     <Layout>
       <SEO title={pageTitle} />
       <Grid
