@@ -28,7 +28,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const [displayMode, setDisplayMode] = useState("indexView")
   const [galleryImage, setGalleryImage] = useState(0)
   const [isQuoteActive, setIsQuoteActive] = useState(false)
-  const [isInfoActive, setInfoActive] = useState(false)
+  const [isInfoActive, setInfoActive] = useState(true)
 
   const imageArr = buildImageData(sanityProject)
   const currentImage = imageArr[galleryImage]
@@ -137,40 +137,54 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 ],
               }}
             >
-              <Box
-                sx={{
-                  bg: "background",
-                  height: isQuoteActive || isInfoActive ? "95%" : "auto",
-                }}
-                mt={[0, 0, 5]}
-                mb={4}
-                pr={[0, 0, 2]}
-                pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
-              >
-                {displayMode === "gallery" && isQuoteActive && (
+              {displayMode === "gallery" && isQuoteActive && (
+                <Box
+                  sx={{
+                    bg: "background",
+                    height: isQuoteActive || isInfoActive ? "95%" : "auto",
+                  }}
+                  mt={[0, 0, 5]}
+                  mb={4}
+                  pr={[0, 0, 2]}
+                  pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
+                >
                   <BlockContent
                     fontFamily="desc"
                     blocks={currentImage.content.quote}
                   />
-                )}
-                {isInfoActive && (
+                </Box>
+              )}
+              {isInfoActive && (
+                <Box
+                  sx={{
+                    bg: "background",
+                    height: isQuoteActive || isInfoActive ? "95%" : "auto",
+                  }}
+                  mt={[0, 0, 5]}
+                  mb={4}
+                  pr={[0, 0, 2]}
+                  pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
+                >
                   <BlockContent blocks={sanityProject._rawProjectDescription} />
-                )}
-              </Box>
+                </Box>
+              )}
+
               <Box
                 sx={{
-                  position: "absolute",
+                  position: "relative",
                   bottom: 0,
                   right: 0,
                   left: 0,
                   bgcol: "bodybg",
+                  display: `flex`,
+                  alignItems: `flex-end`,
+                  minHeight: `100%`,
+                  pt: "5",
                 }}
               >
                 {displayMode === "gallery" && !isInfoActive && (
                   <Box
-                    // className="noMb"
                     sx={{
-                      // textTransform: "uppercase",
                       display: ["none", "inherit", "inherit"],
                     }}
                     mb={4}

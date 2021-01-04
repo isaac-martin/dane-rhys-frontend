@@ -27,10 +27,10 @@ const Actions = ({ actions, hasQuote, textWidth }) => {
     <Box
       sx={{
         position: "fixed",
-        bottom: ["0", "1", "4"],
+        bottom: ["0", "1", "0"],
         bg: "background",
-        pb: ["3", "0", "0"],
-        pt: ["3", "0", "0"],
+        pb: ["3", "0", "4"],
+        pt: ["3", "2", "2"],
         width: textWidth,
       }}
     >
