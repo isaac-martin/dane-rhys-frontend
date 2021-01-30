@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Flex, Box } from "theme-ui"
+import { Flex, Box, Text } from "theme-ui"
 import { useSwipeable } from "react-swipeable"
 
 // @jsx jsx
@@ -27,7 +27,7 @@ const variants = {
   },
 }
 
-const GalleryView = ({ currentImage, increment, decrement, index }) => {
+const GalleryView = ({ currentImage, increment, decrement, index, title }) => {
   const arrowListener = ({ key }) => {
     if (key === "ArrowRight") {
       increment()
@@ -121,26 +121,14 @@ const GalleryView = ({ currentImage, increment, decrement, index }) => {
           />
           <Box
             sx={{ flex: [0, 1, 1], height: "auto", maxHeight: "100%" }}
-            mb={[4, 0, 0]}
-            mt={[4, 0, 0]}
+            mb={[0, 0, 0]}
+            mt={[0, 0, 0]}
           >
             <Img
               style={{ maxHeight: "100%" }}
               imgStyle={{ objectFit: "contain" }}
               fluid={currentImage.image.asset.fluid}
               max
-            />
-          </Box>
-          <Box
-            sx={{
-              display: ["inherit", "none", "none"],
-            }}
-            pb={5}
-            pt={1}
-          >
-            <BlockContent
-              fontFamily="desc"
-              blocks={currentImage.content.desc}
             />
           </Box>
         </motion.div>

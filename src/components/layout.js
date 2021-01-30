@@ -40,11 +40,11 @@ const Layout = ({ children, showBackBtn }) => {
 
   return (
     <Box p={4} css={{ height: `100vh` }}>
-      {showBackBtn && (
+      {/* {showBackBtn && (
         <Back width={textWidth} to="/">
           Back
         </Back>
-      )}
+      )} */}
       {children}
     </Box>
   )

@@ -16,4 +16,16 @@ export default {
     primary: "#0061c9",
   },
   textWidth: 350,
+  buttons: {
+    primary: {
+      color: "black",
+      bg: "transparent",
+      border: "1px solid black",
+      borderRadius: "0px",
+    },
+    secondary: {
+      color: "background",
+      bg: "secondary",
+    },
+  },
 }

@@ -16,22 +16,22 @@ export const Button = styled.button(({ active, theme, size = 16 }) => {
   }
 })
 
-const Actions = ({ actions, hasQuote, textWidth }) => {
+const Actions = ({ actions, textWidth }) => {
   let actionsArr = actions
-
-  if (!hasQuote) {
-    actionsArr = actions.filter(action => !action.label.includes("Quote"))
-  }
 
   return (
     <Box
       sx={{
-        position: "fixed",
-        bottom: ["0", "1", "0"],
-        bg: "background",
-        pb: ["3", "0", "4"],
-        pt: ["3", "2", "2"],
-        width: textWidth,
+        mt: "auto",
+        pt: "3",
+        position: ["fixed", "fixed", "fixed"],
+        bottom: [0],
+        left: 0,
+        pl: "4",
+        pb: "2",
+        background: "white",
+        zIndex: 199,
+        width: ["95vw", "95vw", textWidth],
       }}
     >
       {actionsArr.map((action, index) => (
@@ -46,6 +46,7 @@ const Actions = ({ actions, hasQuote, textWidth }) => {
           {index !== actionsArr.length - 1 && "/"}
         </>
       ))}
+      {/* </Box> */}
     </Box>
   )
 }

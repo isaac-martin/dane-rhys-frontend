@@ -2,17 +2,44 @@ import React, { useState } from "react"
 // @jsx jsx
 import { jsx } from "theme-ui"
 import BlockContent from "../components/BlockContent"
-import { Grid, Box, Flex } from "theme-ui"
+import { Grid, Box, Flex, Text, Button } from "theme-ui"
 
 import IndexView from "../components/ImageViewers/IndexViewer"
 import GalleryView from "../components/ImageViewers/GalleryView"
 import Actions from "../components/ImageViewers/Actions"
 import Layout from "../components/layout"
 
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { useThemeUI } from "theme-ui"
 import SEO from "../components/seo"
+import Modal from "react-modal"
 
+const modalStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    zIndex: 999,
+  },
+  content: {
+    position: "absolute",
+    top: "90px",
+    left: "90px",
+    right: "90px",
+    bottom: "90px",
+    // maxWidth: "600px",
+    background: "#fff",
+    overflow: "auto",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "4px",
+    outline: "none",
+    padding: "50px",
+    paddingRight: "160px",
+  },
+}
 const buildImageData = project => {
   const { images, _rawImages } = project
   return images.map((image, i) => ({
@@ -27,8 +54,8 @@ const buildImageData = project => {
 const ProjectTemplate = ({ data: { sanityProject } }) => {
   const [displayMode, setDisplayMode] = useState("indexView")
   const [galleryImage, setGalleryImage] = useState(0)
-  const [isQuoteActive, setIsQuoteActive] = useState(false)
-  const [isInfoActive, setInfoActive] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isQuoteShown, setQuoteShow] = useState(false)
 
   const imageArr = buildImageData(sanityProject)
   const currentImage = imageArr[galleryImage]
@@ -36,7 +63,6 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const jumpToImage = image => {
     setGalleryImage(image)
     setDisplayMode("gallery")
-    setInfoActive(false)
   }
 
   const paginate = direction => {
@@ -47,7 +73,6 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
       return false
     }
     setGalleryImage(galleryImage + direction)
-    setIsQuoteActive(false)
   }
 
   const actions = {
@@ -55,50 +80,65 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
       label: "Index",
       onClick: () => {
         setDisplayMode("indexView")
-        setIsQuoteActive(false)
-        setInfoActive(false)
+        setQuoteShow(false)
       },
       isActive: displayMode === "indexView",
-    },
-    quote: {
-      label: "Quote ^",
-      onClick: () => {
-        setIsQuoteActive(!isQuoteActive)
-        setInfoActive(false)
-      },
-      isActive: isQuoteActive,
     },
     gallery: {
       label: "Gallery",
       onClick: () => {
-        setInfoActive(false)
         setDisplayMode("gallery")
-        setIsQuoteActive(false)
       },
       isActive: displayMode === "gallery",
     },
-    info: {
-      label: "Project Info",
-      onClick: () => {
-        setInfoActive(!isInfoActive)
-        setIsQuoteActive(false)
-      },
-      isActive: isInfoActive,
-    },
   }
 
-  const allActions = [
-    actions["gallery"],
-    actions["index"],
-    actions["info"],
-    actions["quote"],
-  ]
+  const allActions = [actions["gallery"], actions["index"]]
 
   const {
     theme: { space, textWidth },
   } = useThemeUI()
 
+  const ImageDescription = () => (
+    <BlockContent
+      marginBottom="0"
+      fontFamily="desc"
+      marginTop={20}
+      blocks={currentImage.content.desc}
+    />
+  )
+
+  const ImageQuoteModal = () => (
+    <BlockContent fontFamily="desc" blocks={currentImage.content.quote} />
+  )
+
+  const ProjectDescModal = () => (
+    <>
+      <Box sx={{ display: ["initial", "initial", "none"] }}>
+        <BlockContent blocks={sanityProject._rawProjectIntro} />
+      </Box>
+      <BlockContent blocks={sanityProject._rawProjectDescription} />
+    </>
+  )
+
+  const ProjectIntro = () => (
+    <BlockContent
+      marginBottom="0"
+      marginTop="4"
+      blocks={sanityProject._rawProjectIntro}
+    />
+  )
+
   const { socialSharing, _rawSocialSharing } = sanityProject
+
+  const imageHasQuote = currentImage.content.quote
+  const projectHasDescription = sanityProject._rawProjectDescription
+
+  const ModalOpenBtn = () => (
+    <Button onClick={() => setIsModalOpen(true)}>Read More</Button>
+  )
+
+  const closeModal = () => setIsModalOpen(false)
   return (
     <Layout showBackBtn>
       <SEO
@@ -109,110 +149,139 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
         }
       />
 
-      <Grid gap={4} columns={["auto", "350px 1fr"]}>
-        <Box css={{ height: [0, 0, `calc(100vh - ${2 * space[4]}px)`] }}>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Modal"
+        style={modalStyles}
+      >
+        <Button
+          sx={{
+            position: "fixed",
+            right: "140px",
+            zIndex: 99,
+            display: "block",
+          }}
+          onClick={() => setIsModalOpen(true)}
+        >
+          Close
+        </Button>
+        <ProjectDescModal />
+      </Modal>
+
+      <Grid
+        gap={4}
+        columns={["auto", "auto", "350px 1fr"]}
+        sx={{ position: "relative" }}
+      >
+        <Box
+          id="textArea"
+          sx={{
+            height: [
+              `calc(50vh - ${2 * space[4]}px)`,
+              `calc(40vh - ${2 * space[4]}px)`,
+              `calc(100vh - ${2 * space[4]}px)`,
+            ],
+            gridRowStart: [2, 2, 1],
+            position: "sticky",
+            top: "4",
+          }}
+        >
           <Flex
             sx={{
               flexDirection: "column",
-              justifyContent: "space-between",
-              height: "100%",
+              justifyContent: "flex-start",
+              height: ["auto", "auto", "100%"],
+              position: "absolute",
+              maxWidth: "350px",
             }}
           >
-            <Box
-              sx={{
-                width: ["calc(100% - 64px)", "100%", textWidth],
-                position: "fixed",
-                overflow: "scroll",
-                height: [
-                  isQuoteActive || isInfoActive ? `100vh` : `auto`,
-                  `95vh`,
-                  `95vh`,
-                ],
-                paddingBottom: "30px",
-                zIndex: 999,
-                bg: [
-                  isInfoActive || isQuoteActive ? "background" : "transparent",
-                  "background",
-                  "transparent",
-                ],
-              }}
-            >
-              {displayMode === "gallery" && isQuoteActive && (
-                <Box
-                  sx={{
-                    bg: "background",
-                    height: isQuoteActive || isInfoActive ? "95%" : "auto",
-                  }}
-                  mt={[0, 0, 5]}
-                  mb={4}
-                  pr={[0, 0, 2]}
-                  pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
-                >
-                  <BlockContent
-                    fontFamily="desc"
-                    blocks={currentImage.content.quote}
-                  />
-                </Box>
-              )}
-              {isInfoActive && (
-                <Box
-                  sx={{
-                    bg: "background",
-                    height: isQuoteActive || isInfoActive ? "95%" : "auto",
-                  }}
-                  mt={[0, 0, 5]}
-                  mb={4}
-                  pr={[0, 0, 2]}
-                  pt={[isQuoteActive || isInfoActive ? 5 : 2, 0, 0]}
-                >
-                  <BlockContent blocks={sanityProject._rawProjectDescription} />
-                </Box>
-              )}
-
-              <Box
+            <Box>
+              <Text
+                as="h2"
                 sx={{
-                  position: "relative",
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  bgcol: "bodybg",
-                  display: `flex`,
-                  alignItems: `flex-end`,
-                  minHeight: `100%`,
-                  pt: "5",
+                  fontWeight: 600,
+                  fontSize: 2,
+                  display: ["none", "none", "inherit"],
                 }}
               >
-                {displayMode === "gallery" && !isInfoActive && (
-                  <Box
-                    sx={{
-                      display: ["none", "inherit", "inherit"],
-                    }}
-                    mb={4}
-                  >
-                    <BlockContent
-                      fontFamily="desc"
-                      blocks={currentImage.content.desc}
-                    />
-                  </Box>
-                )}
-
-                <Actions
-                  textWidth={textWidth}
-                  hasQuote={
-                    displayMode === "gallery" &&
-                    currentImage &&
-                    currentImage.content.quote !== undefined
-                  }
-                  actions={allActions}
-                  active={displayMode}
-                  isQuoteActive={isQuoteActive}
-                  IsInfoActive={isInfoActive}
-                />
-              </Box>
+                <Link to="/">{sanityProject.title}</Link>
+              </Text>
+              {displayMode === "indexView" && (
+                <Box sx={{ display: ["none", "none", "initial"] }}>
+                  <ProjectIntro />
+                  {projectHasDescription && <ModalOpenBtn />}
+                </Box>
+              )}
+              {displayMode === "gallery" && <ImageDescription />}
             </Box>
+
+            {imageHasQuote && displayMode === "gallery" && (
+              <Box sx={{ overflowY: "scroll", flex: "1" }}>
+                <Box
+                  sx={{
+                    position: "sticky",
+                    top: 0,
+                    pb: 3,
+                    background: "white",
+                  }}
+                >
+                  <Button onClick={() => setQuoteShow(quote => !quote)}>
+                    Read {isQuoteShown ? "Less" : "More"}
+                  </Button>
+                </Box>
+                {isQuoteShown && <ImageQuoteModal />}
+              </Box>
+            )}
           </Flex>
         </Box>
-        <Box css={{ height: "90vh", zIndex: 99 }}>
+        <Actions
+          textWidth={textWidth}
+          actions={allActions}
+          active={displayMode}
+        />
+
+        <Box
+          id="gallery"
+          sx={{
+            zIndex: 99,
+            height: [
+              displayMode === "gallery" ? "45vh" : "auto",
+              "55vh",
+              "auto",
+            ],
+          }}
+        >
+          <Box
+            sx={{
+              display: ["flex", "flex", "none"],
+              mb: 0,
+              position: "fixed",
+              top: 0,
+              left: 0,
+              pl: "4",
+              pt: 3,
+              pb: 3,
+              width: "calc(100% - 30px)",
+
+              background: "white",
+              zIndex: 999,
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              as="h2"
+              sx={{
+                fontWeight: 600,
+                fontSize: 2,
+              }}
+            >
+              <Link to="/">{sanityProject.title}</Link>
+            </Text>
+            <ModalOpenBtn />
+          </Box>
+
           {displayMode === "indexView" && (
             <IndexView
               jumpToImage={jumpToImage}
@@ -221,15 +290,16 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
           )}
           {displayMode === "gallery" && currentImage && (
             <GalleryView
+              title={sanityProject.title}
               index={galleryImage}
               currentImage={currentImage}
               increment={() => {
                 paginate(1)
-                setInfoActive(false)
+                setQuoteShow(false)
               }}
               decrement={() => {
                 paginate(-1)
-                setInfoActive(false)
+                setQuoteShow(false)
               }}
               images={sanityProject.images}
             />
@@ -245,6 +315,7 @@ export const projectData = graphql`
     sanityProject(slug: { current: { eq: $slug } }) {
       title
       _rawProjectDescription(resolveReferences: { maxDepth: 10 })
+      _rawProjectIntro(resolveReferences: { maxDepth: 10 })
       _rawImages(resolveReferences: { maxDepth: 10 })
       images {
         image {
