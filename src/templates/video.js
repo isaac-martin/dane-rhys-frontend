@@ -16,9 +16,13 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
     <Layout showBackBtn>
       <SEO
         title={sanityVideoProject.title}
-        image={socialSharing && socialSharing.image.asset.url}
+        image={
+          socialSharing && socialSharing.image && socialSharing.image.asset.url
+        }
         description={
-          socialSharing && _rawSocialSharing.text[0].children[0].text
+          socialSharing &&
+          socialSharing.text &&
+          _rawSocialSharing.text[0].children[0].text
         }
       />
       <Grid

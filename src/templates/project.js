@@ -131,7 +131,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
 
   const { socialSharing, _rawSocialSharing } = sanityProject
 
-  const imageHasQuote = currentImage.content.quote
+  const imageHasQuote = currentImage && currentImage.content.quote
   const projectHasDescription = sanityProject._rawProjectDescription
 
   const ModalOpenBtn = () => (
