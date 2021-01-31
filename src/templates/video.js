@@ -1,9 +1,9 @@
 import React from "react"
 import BlockContent from "../components/BlockContent"
-import { Grid, Box, Flex, Heading } from "theme-ui"
+import { Grid, Box, Flex, Heading, Text } from "theme-ui"
 import Layout from "../components/layout"
 
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { useThemeUI } from "theme-ui"
 import SEO from "../components/seo"
 
@@ -43,17 +43,16 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
               height: "100%",
             }}
           >
-            <Box sx={{ marginTop: [0, 0, "auto"] }}>
-              <Heading mb={4}>{sanityVideoProject.title}</Heading>
-              <Box
-                // className="noMb"
-                mb={4}
-              >
-                <BlockContent
-                  fontFamily="desc"
-                  blocks={sanityVideoProject._rawProjectDescription}
-                />
-              </Box>
+            <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+              <Heading sx={{ display: ["none", "none", "inherit"] }} mb={4}>
+                {sanityVideoProject.title}
+              </Heading>
+            </Link>
+            <Box mb={4} sx={{ marginTop: [0, 0, "auto"] }}>
+              <BlockContent
+                fontFamily="desc"
+                blocks={sanityVideoProject._rawProjectDescription}
+              />
             </Box>
           </Flex>
         </Box>
@@ -61,11 +60,24 @@ const VideoTemplate = ({ data: { sanityVideoProject } }) => {
           <Flex
             sx={{
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "flexStart",
               height: "100%",
               zIndex: 9999,
             }}
           >
+            <Text
+              as="h2"
+              mb="2"
+              sx={{
+                fontWeight: 600,
+                fontSize: 2,
+                display: ["inherit", "inherit", "none"],
+              }}
+            >
+              <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                {sanityVideoProject.title}
+              </Link>
+            </Text>
             <Box className="video-responsive">
               <iframe
                 src={`https://player.vimeo.com/video/${sanityVideoProject.vimeoId}`}
