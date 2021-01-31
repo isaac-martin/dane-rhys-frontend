@@ -92,7 +92,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   )
 
   const ProjectDescModal = () => (
-    <Box sx={{ pb: 7 }}>
+    <Box>
       <Box sx={{ display: ["initial", "initial", "none"] }}>
         <BlockContent blocks={sanityProject._rawProjectIntro} />
       </Box>
@@ -145,7 +145,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
       bottom: "initial",
       width: "100vw",
       maxWidth: "min(1200px, 100vw)",
-      maxHeight: "min(900px, 100vh)",
+      maxHeight: "min(850px, 100vh)",
       background: "#fff",
       overflow: "auto",
       WebkitOverflowScrolling: "touch",
