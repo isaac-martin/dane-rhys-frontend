@@ -139,10 +139,13 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
     content: {
       position: "relative",
       inset: 0,
-
+      top: "initial",
+      left: "initial",
+      right: "initial",
+      bottom: "initial",
       width: "100vw",
-      maxWidth: "1200px",
-      maxHeight: "900px",
+      maxWidth: "min(1200px, 100vw)",
+      maxHeight: "min(1024px, 100vh)",
       background: "#fff",
       overflow: "auto",
       WebkitOverflowScrolling: "touch",
