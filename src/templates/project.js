@@ -339,6 +339,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
           )}
           {displayMode === "gallery" && currentImage && (
             <GalleryView
+              mt={mobileHeaderHeight - 20}
               title={sanityProject.title}
               index={galleryImage}
               currentImage={currentImage}

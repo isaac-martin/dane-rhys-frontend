@@ -24,7 +24,7 @@ const variants = {
   },
 }
 
-const GalleryView = ({ currentImage, increment, decrement, index, title }) => {
+const GalleryView = ({ currentImage, increment, decrement, index, mt }) => {
   const arrowListener = ({ key }) => {
     if (key === "ArrowRight") {
       increment()
@@ -50,7 +50,8 @@ const GalleryView = ({ currentImage, increment, decrement, index, title }) => {
 
   return (
     <Flex
-      css={{
+      mt={[mt, "auto", "auto"]}
+      sx={{
         position: "relative",
         height: `100%`,
       }}
@@ -122,7 +123,7 @@ const GalleryView = ({ currentImage, increment, decrement, index, title }) => {
             mt={[0, 0, 0]}
           >
             <Img
-              style={{ maxHeight: "100%" }}
+              style={{ maxHeight: "100%", width: "100%", height: "100%" }}
               imgStyle={{ objectFit: "contain" }}
               fluid={currentImage.image.asset.fluid}
               max
