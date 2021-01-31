@@ -216,7 +216,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
 
       <Grid
         gap={4}
-        columns={["auto", "auto", "350px 1fr"]}
+        columns={["auto", "auto", "380px 1fr"]}
         sx={{ position: "relative" }}
       >
         <Box
@@ -238,7 +238,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               justifyContent: "flex-start",
               height: ["auto", "auto", "100%"],
               position: "absolute",
-              maxWidth: "350px",
+              maxWidth: "380px",
             }}
           >
             <Box>
