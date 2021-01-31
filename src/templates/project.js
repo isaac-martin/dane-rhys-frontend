@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { jsx } from "theme-ui"
 import BlockContent from "../components/BlockContent"
 import { Grid, Box, Flex, Text, Button } from "theme-ui"
+import { useResponsiveValue } from "@theme-ui/match-media"
 
 import IndexView from "../components/ImageViewers/IndexViewer"
 import GalleryView from "../components/ImageViewers/GalleryView"
@@ -13,33 +14,8 @@ import { graphql, Link } from "gatsby"
 import { useThemeUI } from "theme-ui"
 import SEO from "../components/seo"
 import Modal from "react-modal"
+import { useScrollBodyLock } from "../utils/bodyScroll"
 
-const modalStyles = {
-  overlay: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
-    zIndex: 999,
-  },
-  content: {
-    position: "absolute",
-    top: "90px",
-    left: "90px",
-    right: "90px",
-    bottom: "90px",
-    // maxWidth: "600px",
-    background: "#fff",
-    overflow: "auto",
-    WebkitOverflowScrolling: "touch",
-    borderRadius: "4px",
-    outline: "none",
-    padding: "50px",
-    paddingRight: "160px",
-  },
-}
 const buildImageData = project => {
   const { images, _rawImages } = project
   return images.map((image, i) => ({
@@ -56,6 +32,9 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const [galleryImage, setGalleryImage] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isQuoteShown, setQuoteShow] = useState(false)
+  const [mobileHeaderHeight, setMobileHeaderHeight] = useState(0)
+
+  const { lock, unlock } = useScrollBodyLock()
 
   const imageArr = buildImageData(sanityProject)
   const currentImage = imageArr[galleryImage]
@@ -113,12 +92,12 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   )
 
   const ProjectDescModal = () => (
-    <>
+    <Box sx={{ pb: 7 }}>
       <Box sx={{ display: ["initial", "initial", "none"] }}>
         <BlockContent blocks={sanityProject._rawProjectIntro} />
       </Box>
       <BlockContent blocks={sanityProject._rawProjectDescription} />
-    </>
+    </Box>
   )
 
   const ProjectIntro = () => (
@@ -134,11 +113,54 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const imageHasQuote = currentImage && currentImage.content.quote
   const projectHasDescription = sanityProject._rawProjectDescription
 
-  const ModalOpenBtn = () => (
-    <Button onClick={() => setIsModalOpen(true)}>Read More</Button>
+  const ModalOpenBtn = ({ variant = "primary" }) => (
+    <Button variant={variant} onClick={() => setIsModalOpen(true)}>
+      Read More
+    </Button>
   )
 
   const closeModal = () => setIsModalOpen(false)
+
+  const display = useResponsiveValue(["block", "block", "flex"])
+
+  const modalStyles = {
+    overlay: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.75)",
+      zIndex: 999,
+      display,
+      alignItems: `center`,
+      justifyContent: `center`,
+    },
+    content: {
+      position: "relative",
+      inset: 0,
+
+      width: "100vw",
+      maxWidth: "1200px",
+      maxHeight: "900px",
+      background: "#fff",
+      overflow: "auto",
+      WebkitOverflowScrolling: "touch",
+      borderRadius: "4px",
+      outline: "none",
+      padding: "30px",
+      alignSelf: `center`,
+    },
+  }
+
+  const mobileHeader = React.useRef(null)
+
+  React.useEffect(() => {
+    console.log(mobileHeader)
+    const height = mobileHeader && mobileHeader.current.clientHeight
+    setMobileHeaderHeight(height)
+  }, [])
+
   return (
     <Layout showBackBtn>
       <SEO
@@ -154,19 +176,40 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
         onRequestClose={closeModal}
         contentLabel="Modal"
         style={modalStyles}
+        onAfterOpen={lock}
+        onAfterClose={unlock}
       >
-        <Button
-          sx={{
-            position: "fixed",
-            right: "140px",
-            zIndex: 99,
-            display: "block",
-          }}
-          onClick={() => setIsModalOpen(true)}
-        >
-          Close
-        </Button>
-        <ProjectDescModal />
+        <Grid gap={2} columns={"1fr 30px"}>
+          <ProjectDescModal />
+          <Button
+            variant="clear"
+            sx={{
+              zIndex: 99,
+              display: "block",
+              width: 35,
+              height: 35,
+              position: "sticky",
+              top: 0,
+              fontSize: "26px",
+              transform: `translateY(-5px)`,
+            }}
+            onClick={() => setIsModalOpen(false)}
+          >
+            <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M13 7l-6 6M7 7l6 6"
+                stroke="black"
+                strokeWidth={1.333}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M10 20C4.482 20 0 15.518 0 10S4.482 0 10 0s10 4.482 10 10-4.482 10-10 10zm0-18.182c-4.51 0-8.182 3.673-8.182 8.182 0 4.51 3.673 8.182 8.182 8.182 4.51 0 8.182-3.673 8.182-8.182 0-4.51-3.673-8.182-8.182-8.182z"
+                fill="black"
+              />
+            </svg>
+          </Button>
+        </Grid>
       </Modal>
 
       <Grid
@@ -205,7 +248,9 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                   display: ["none", "none", "inherit"],
                 }}
               >
-                <Link to="/">{sanityProject.title}</Link>
+                <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                  {sanityProject.title}
+                </Link>
               </Text>
               {displayMode === "indexView" && (
                 <Box sx={{ display: ["none", "none", "initial"] }}>
@@ -253,6 +298,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
           }}
         >
           <Box
+            ref={mobileHeader}
             sx={{
               display: ["flex", "flex", "none"],
               mb: 0,
@@ -263,11 +309,11 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               pt: 3,
               pb: 3,
               width: "calc(100% - 30px)",
-
               background: "white",
               zIndex: 999,
               justifyContent: "space-between",
               alignItems: "center",
+              flexWrap: `wrap`,
             }}
           >
             <Text
@@ -277,13 +323,16 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 fontSize: 2,
               }}
             >
-              <Link to="/">{sanityProject.title}</Link>
+              <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                {sanityProject.title}
+              </Link>
             </Text>
-            <ModalOpenBtn />
+            {displayMode === "indexView" && <ModalOpenBtn variant="text" />}
           </Box>
 
           {displayMode === "indexView" && (
             <IndexView
+              mt={mobileHeaderHeight - 20}
               jumpToImage={jumpToImage}
               images={sanityProject.images}
             />

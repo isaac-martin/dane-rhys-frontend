@@ -46,7 +46,6 @@ const Actions = ({ actions, textWidth }) => {
           {index !== actionsArr.length - 1 && "/"}
         </>
       ))}
-      {/* </Box> */}
     </Box>
   )
 }

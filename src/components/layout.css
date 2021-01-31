@@ -162,3 +162,7 @@ ul {
 li {
   margin-bottom: 5px;
 }
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}

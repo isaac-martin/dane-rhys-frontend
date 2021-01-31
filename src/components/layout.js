@@ -9,7 +9,6 @@ import React from "react"
 import { Box } from "theme-ui"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
-import { useThemeUI } from "theme-ui"
 
 import { padding, margin } from "polished"
 import "./layout.css"
@@ -34,17 +33,8 @@ export const Back = styled(Link)(({ active, theme, size = 16, width }) => {
 })
 
 const Layout = ({ children, showBackBtn }) => {
-  const {
-    theme: { textWidth },
-  } = useThemeUI()
-
   return (
     <Box p={4} css={{ height: `100vh` }}>
-      {/* {showBackBtn && (
-        <Back width={textWidth} to="/">
-          Back
-        </Back>
-      )} */}
       {children}
     </Box>
   )

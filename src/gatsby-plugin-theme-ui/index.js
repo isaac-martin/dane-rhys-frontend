@@ -23,9 +23,21 @@ export default {
       border: "1px solid black",
       borderRadius: "0px",
     },
+    clear: {
+      bg: `initial`,
+      border: `none`,
+      padding: "5px",
+      cursor: "pointer",
+    },
     secondary: {
       color: "background",
       bg: "secondary",
+    },
+    text: {
+      color: "black",
+      bg: "transparent",
+      border: "none",
+      p: 0,
     },
   },
 }

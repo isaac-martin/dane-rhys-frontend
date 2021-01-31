@@ -1,11 +1,8 @@
 import React, { useEffect } from "react"
-import { Flex, Box, Text } from "theme-ui"
+import { Flex, Box } from "theme-ui"
 import { useSwipeable } from "react-swipeable"
-
 // @jsx jsx
 import { jsx } from "theme-ui"
-import BlockContent from "../BlockContent"
-
 import { motion, AnimatePresence } from "framer-motion"
 import Img from "gatsby-image"
 
