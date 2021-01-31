@@ -121,7 +121,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
 
   const closeModal = () => setIsModalOpen(false)
 
-  const display = useResponsiveValue(["block", "block", "flex"])
+  const display = useResponsiveValue(["flex", "flex", "flex"])
 
   const modalStyles = {
     overlay: {
@@ -145,7 +145,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
       bottom: "initial",
       width: "100vw",
       maxWidth: "min(1200px, 100vw)",
-      maxHeight: "min(1024px, 100vh)",
+      maxHeight: "min(900px, 100vh)",
       background: "#fff",
       overflow: "auto",
       WebkitOverflowScrolling: "touch",
@@ -159,7 +159,6 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   const mobileHeader = React.useRef(null)
 
   React.useEffect(() => {
-    console.log(mobileHeader)
     const height = mobileHeader && mobileHeader.current.clientHeight
     setMobileHeaderHeight(height)
   }, [])
