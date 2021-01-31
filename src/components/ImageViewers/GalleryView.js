@@ -50,7 +50,7 @@ const GalleryView = ({ currentImage, increment, decrement, index, mt }) => {
 
   return (
     <Flex
-      mt={[mt, "auto", "auto"]}
+      mt={[mt, mt, "auto"]}
       sx={{
         position: "relative",
         height: `100%`,

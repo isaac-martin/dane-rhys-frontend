@@ -8,7 +8,7 @@ import Img from "gatsby-image"
 const IndexView = ({ images, jumpToImage, mt }) => {
   return (
     <Grid
-      mt={[mt, "auto", "auto"]}
+      mt={[mt, mt, "auto"]}
       gap={16}
       columns={[[2, "1fr 1fr 1fr"], [3, "1fr 1fr 1fr"], [(3, "1fr 1fr 1fr")]]}
       pb={4}
