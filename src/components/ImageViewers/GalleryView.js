@@ -126,7 +126,6 @@ const GalleryView = ({ currentImage, increment, decrement, index, mt }) => {
               style={{ maxHeight: "100%", width: "100%", height: "100%" }}
               imgStyle={{ objectFit: "contain" }}
               fluid={currentImage.image.asset.fluid}
-              max
             />
           </Box>
         </motion.div>
