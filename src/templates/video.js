@@ -103,9 +103,7 @@ export const projectData = graphql`
       title
       thumbnail {
         asset {
-          fluid {
-            ...GatsbySanityImageFluid
-          }
+          gatsbyImageData
         }
       }
       socialSharing {

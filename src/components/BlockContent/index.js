@@ -2,7 +2,6 @@ import BaseBlockContent from "@sanity/block-content-to-react"
 // @jsx jsx
 import { jsx } from "theme-ui"
 import { Box, Heading } from "theme-ui"
-import React from "react"
 const serializers = {
   marks: {
     link: ({ mark, children }) => {

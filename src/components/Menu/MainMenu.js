@@ -64,9 +64,7 @@ const MainMenu = () => {
         }
         homeImages {
           asset {
-            fluid {
-              ...GatsbySanityImageFluid
-            }
+            gatsbyImageData
           }
         }
       }

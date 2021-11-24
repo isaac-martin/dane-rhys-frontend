@@ -372,9 +372,7 @@ export const projectData = graphql`
       images {
         image {
           asset {
-            fluid(maxWidth: 1300) {
-              ...GatsbySanityImageFluid
-            }
+            gatsbyImageData
           }
         }
       }

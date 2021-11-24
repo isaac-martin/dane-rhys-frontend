@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Box, Flex } from "theme-ui"
 import { useThemeUI } from "theme-ui"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const MainMenu = () => {
   const menuImages = useStaticQuery(graphql`
@@ -10,9 +10,7 @@ const MainMenu = () => {
       sanityMenu(menuTitle: { eq: "Main Menu" }) {
         homeImages {
           asset {
-            fluid {
-              ...GatsbySanityImageFluid
-            }
+            gatsbyImageData
           }
         }
       }
@@ -46,11 +44,11 @@ const MainMenu = () => {
           flexDirection: `column`,
         }}
       >
-        {imagesRandom.map(img => (
-          <Img
+        {imagesRandom.map(({ asset }) => (
+          <GatsbyImage
+            image={asset.gatsbyImageData}
             style={{ width: "100%", marginBottom: space[2] }}
             imgStyle={{ objectFit: "contain" }}
-            fluid={img.asset.fluid}
           />
         ))}
       </Flex>

@@ -1,6 +1,6 @@
 // See other presets to try at https://theme-ui.com/packages/presets
 import { base } from "@theme-ui/presets"
-export default {
+const styles = {
   ...base,
   fonts: {
     ...base.fonts,
@@ -14,6 +14,10 @@ export default {
   colors: {
     ...base.colors,
     primary: "#0061c9",
+  },
+  lineHeights: {
+    body: 1.9,
+    heading: 1.2,
   },
   textWidth: 350,
   buttons: {
@@ -41,3 +45,5 @@ export default {
     },
   },
 }
+
+export default styles
