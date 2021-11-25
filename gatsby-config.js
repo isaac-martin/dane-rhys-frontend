@@ -27,6 +27,7 @@ module.exports = {
       options: {
         projectId: `ixzt230q`,
         dataset: `production`,
+        overlayDrafts: true,
         // a token with read permissions is required
         // if you have a private dataset
         token: process.env.SANITY_TOKEN,

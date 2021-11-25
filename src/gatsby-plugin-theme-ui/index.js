@@ -1,5 +1,6 @@
 // See other presets to try at https://theme-ui.com/packages/presets
 import { base } from "@theme-ui/presets"
+import { buttons } from "polished"
 const styles = {
   ...base,
   fonts: {
@@ -42,6 +43,31 @@ const styles = {
       bg: "transparent",
       border: "none",
       p: 0,
+    },
+    project: {
+      fontWeight: "bold",
+      color: "black",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+    },
+    menu: {
+      color: "black",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+      fontWeight: `bold`,
+      letterSpacing: `0.1em`,
+      textTransform: `uppercase`,
+    },
+    menuInversed: {
+      color: "white",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+      fontWeight: `bold`,
+      letterSpacing: `0.1em`,
+      textTransform: `uppercase`,
     },
   },
 }

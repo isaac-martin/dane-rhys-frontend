@@ -10,7 +10,7 @@ const IndexView = ({ images, jumpToImage, mt }) => {
     <Grid
       mt={[mt, mt, "auto"]}
       gap={16}
-      columns={[[2, "1fr 1fr 1fr"], [3, "1fr 1fr 1fr"], [(3, "1fr 1fr 1fr")]]}
+      columns={[[2, "1fr 1fr"], [2, "1fr 1fr"], [(2, "1fr 1fr")]]}
       pb={4}
     >
       {images.map((image, index) => (

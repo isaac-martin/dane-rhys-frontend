@@ -250,9 +250,17 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                   display: ["none", "none", "inherit"],
                 }}
               >
-                <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                <Button
+                  variant="project"
+                  onClick={() =>
+                    setDisplayMode(
+                      displayMode === "indexView" ? "gallery" : "indexView"
+                    )
+                  }
+                  style={{ fontWeight: "bold" }}
+                >
                   {sanityProject.title}
-                </Link>
+                </Button>
               </Text>
               {displayMode === "indexView" && (
                 <Box sx={{ display: ["none", "none", "initial"] }}>

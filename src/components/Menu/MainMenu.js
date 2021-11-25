@@ -1,6 +1,5 @@
 import React from "react"
 import Submenu from "./SubMenu"
-
 import { useStaticQuery, graphql } from "gatsby"
 
 const MainMenu = () => {
@@ -62,22 +61,18 @@ const MainMenu = () => {
             }
           }
         }
-        homeImages {
-          asset {
-            gatsbyImageData
-          }
-        }
       }
     }
   `)
 
   const subMenus = menu.sanityMenu.menuItems
+  const [openMenu, setMenuOpen] = React.useState("")
   return (
-    <section style={{ paddingBottom: 30 }}>
+    <>
       {subMenus.map(sm => (
-        <Submenu data={sm} />
+        <Submenu data={sm} openMenu={openMenu} setMenuOpen={setMenuOpen} />
       ))}
-    </section>
+    </>
   )
 }
 
