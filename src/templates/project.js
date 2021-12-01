@@ -164,7 +164,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
   }, [])
 
   return (
-    <Layout showBackBtn>
+    <Layout>
       <SEO
         title={sanityProject.title}
         image={socialSharing && socialSharing.image.asset.url}
@@ -251,6 +251,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 }}
               >
                 <Button
+                  css={{ textAlign: "left" }}
                   variant="project"
                   onClick={() =>
                     setDisplayMode(
@@ -303,7 +304,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
             height: [
               displayMode === "gallery" ? "45vh" : "auto",
               "55vh",
-              "auto",
+              "calc(100vh - 140px)",
             ],
           }}
         >
@@ -333,7 +334,14 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
                 fontSize: 2,
               }}
             >
-              <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+              <Link
+                to="/"
+                style={{
+                  color: "black",
+                  textDecoration: "none",
+                  textAlign: "left",
+                }}
+              >
                 {sanityProject.title}
               </Link>
             </Text>

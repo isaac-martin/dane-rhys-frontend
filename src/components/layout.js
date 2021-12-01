@@ -1,20 +1,14 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import { Box, Heading } from "theme-ui"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import { Button } from "theme-ui"
-
+import DaneRhys from "../assets/DaneRhys.png"
 import { padding, margin } from "polished"
 import "./layout.css"
-import MainMenu from "../components/Menu/MainMenu"
+import MainMenu from "./Menu/MainMenu"
 import { useScrollBodyLock } from "../utils/bodyScroll"
+import { motion, AnimatePresence } from "framer-motion"
 
 export const Back = styled(Link)(({ active, theme, size = 16, width }) => {
   return {
@@ -35,12 +29,19 @@ export const Back = styled(Link)(({ active, theme, size = 16, width }) => {
   }
 })
 
-const Layout = ({ children, removeHeight }) => {
+const Layout = ({ children, removeHeight, location }) => {
   const [showMenu, setShowMenu] = React.useState(false)
   const { lock, unlock } = useScrollBodyLock()
+  const isBrowser = typeof window !== "undefined"
+  React.useEffect(() => {
+    unlock()
+  }, [children])
 
   const handleMenu = option => {
     if (option === "open") {
+      if (isBrowser) {
+        window.scrollTo(0, 0)
+      }
       setShowMenu(true)
       lock()
     }
@@ -56,30 +57,53 @@ const Layout = ({ children, removeHeight }) => {
     buttonModifier: "menu",
     pb: 30,
   }
-  const darkNavTheme = {
-    color: "white",
-    background: "black",
-    buttonModifier: "menuInversed",
-    pb: 10,
-  }
 
-  const navTheme = showMenu ? darkNavTheme : mainNavTheme
+  const navTheme = mainNavTheme
   return (
     <>
-      {showMenu && (
-        <Box
-          style={{
-            // position: `relative`,
-            // top: 0,
-            // right: 0,
-            padding: "80px 32px 32px",
-            background: `black`,
-            zIndex: 299,
-          }}
-        >
-          <MainMenu />
-        </Box>
-      )}
+      <AnimatePresence initial={false}>
+        {showMenu && (
+          <motion.section
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            style={{ position: "relative", zIndex: 9999 }}
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+          >
+            <Box
+              style={{
+                padding: "32px",
+                background: `black`,
+              }}
+            >
+              <MainMenu />
+              <Button
+                css={{
+                  width: 40,
+                  color: "white",
+                  position: "absolute",
+                  right: 32,
+                  top: 32,
+                }}
+                variant="project"
+                onClick={() => handleMenu("close")}
+              >
+                <svg viewBox="0 0 40 40" fill="currentColor">
+                  <path
+                    fill="currentColor"
+                    stroke="white"
+                    d="M 10,10 L 30,30 M 30,10 L 10,30"
+                  />
+                </svg>
+              </Button>
+            </Box>
+          </motion.section>
+        )}
+      </AnimatePresence>
       <nav
         style={{
           zIndex: 999,
@@ -108,22 +132,21 @@ const Layout = ({ children, removeHeight }) => {
             style={{ textDecoration: `none`, color: navTheme.color }}
             to="/"
           >
-            Dane Rhys
+            <img style={{ width: 120 }} src={DaneRhys}></img>
           </Link>
         </Heading>
         <Button
           variant={navTheme.buttonModifier}
-          onClick={() => handleMenu(showMenu ? "close" : "open")}
+          onClick={() => handleMenu("open")}
         >
-          {!showMenu ? `Menu` : `Close Menu`}
+          Menu
         </Button>
       </nav>
       <Box
         p={4}
-        pt={0}
+        pt={showMenu ? 4 : 6}
         css={{
           height: removeHeight ? `auto` : `100vh`,
-          zIndex: 999,
           width: `100vw`,
         }}
       >

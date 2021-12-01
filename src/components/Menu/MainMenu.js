@@ -1,6 +1,7 @@
 import React from "react"
 import Submenu from "./SubMenu"
 import { useStaticQuery, graphql } from "gatsby"
+import { motion, AnimatePresence } from "framer-motion"
 
 const MainMenu = () => {
   const menu = useStaticQuery(graphql`
