@@ -105,7 +105,7 @@ const Layout = ({ children, removeHeight, location }) => {
         )}
       </AnimatePresence>
       <nav
-        style={{
+        css={{
           zIndex: 999,
           position: `relative`,
           display: `flex`,
@@ -115,8 +115,7 @@ const Layout = ({ children, removeHeight, location }) => {
           right: 30,
           left: 30,
           background: navTheme.background,
-          padding: `30px 0`,
-          paddingBottom: navTheme.pb,
+          padding: ["20px 0", "20px 0", `30px 0`],
         }}
       >
         <Heading
