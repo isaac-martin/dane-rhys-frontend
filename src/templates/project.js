@@ -314,7 +314,7 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
               display: ["flex", "flex", "none"],
               mb: 0,
               position: "fixed",
-              top: 0,
+              top: 75,
               left: 0,
               pl: "4",
               pt: 3,
