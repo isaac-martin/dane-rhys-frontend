@@ -3,12 +3,13 @@ import { Box, Heading } from "theme-ui"
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
 import { Button } from "theme-ui"
-import DaneRhys from "../assets/DaneRhys.png"
 import { padding, margin } from "polished"
 import "./layout.css"
 import MainMenu from "./Menu/MainMenu"
 import { useScrollBodyLock } from "../utils/bodyScroll"
 import { motion, AnimatePresence } from "framer-motion"
+import { jsx } from "theme-ui"
+// @jsx jsx
 
 export const Back = styled(Link)(({ active, theme, size = 16, width }) => {
   return {
@@ -105,7 +106,7 @@ const Layout = ({ children, removeHeight, location }) => {
         )}
       </AnimatePresence>
       <nav
-        css={{
+        sx={{
           zIndex: 999,
           position: `relative`,
           display: `flex`,
@@ -128,10 +129,14 @@ const Layout = ({ children, removeHeight, location }) => {
           }}
         >
           <Link
-            style={{ textDecoration: `none`, color: navTheme.color }}
+            style={{
+              textDecoration: `none`,
+              color: navTheme.color,
+              fontSize: 32,
+            }}
             to="/"
           >
-            <img style={{ width: 120 }} src={DaneRhys}></img>
+            <h1>Dane Rhys</h1>
           </Link>
         </Heading>
         <Button
