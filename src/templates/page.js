@@ -18,7 +18,7 @@ const PageTemplate = ({ data: { sanityPage } }) => {
         }
       />
       <Flex pt={5} pb={4} css={{ justifyContent: "center" }}>
-        <Box css={{ maxWidth: "60ch" }}>
+        <Box css={{ maxWidth: "70ch" }}>
           <BlockContent blocks={sanityPage._rawPageContent} />
         </Box>
       </Flex>

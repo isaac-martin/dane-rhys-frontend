@@ -169,3 +169,7 @@ li {
 .ReactModal__Body--open {
   overflow-y: hidden;
 }
+
+.blockContent-wrapper img {
+  max-width: 100%;
+}
