@@ -22,6 +22,12 @@ const styles = {
   },
   textWidth: 350,
   buttons: {
+    black: {
+      color: "white",
+      bg: "black",
+      border: "1px solid black",
+      borderRadius: "0px",
+    },
     primary: {
       color: "black",
       bg: "transparent",
