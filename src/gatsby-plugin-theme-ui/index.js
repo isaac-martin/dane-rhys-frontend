@@ -1,6 +1,7 @@
 // See other presets to try at https://theme-ui.com/packages/presets
 import { base } from "@theme-ui/presets"
-export default {
+import { buttons } from "polished"
+const styles = {
   ...base,
   fonts: {
     ...base.fonts,
@@ -15,8 +16,18 @@ export default {
     ...base.colors,
     primary: "#0061c9",
   },
+  lineHeights: {
+    body: 1.9,
+    heading: 1.2,
+  },
   textWidth: 350,
   buttons: {
+    black: {
+      color: "white",
+      bg: "black",
+      border: "1px solid black",
+      borderRadius: "0px",
+    },
     primary: {
       color: "black",
       bg: "transparent",
@@ -39,5 +50,32 @@ export default {
       border: "none",
       p: 0,
     },
+    project: {
+      fontWeight: "bold",
+      color: "black",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+    },
+    menu: {
+      color: "black",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+      fontWeight: `bold`,
+      letterSpacing: `0.1em`,
+      textTransform: `uppercase`,
+    },
+    menuInversed: {
+      color: "white",
+      bg: "transparent",
+      border: "none",
+      p: 0,
+      fontWeight: `bold`,
+      letterSpacing: `0.1em`,
+      textTransform: `uppercase`,
+    },
   },
 }
+
+export default styles

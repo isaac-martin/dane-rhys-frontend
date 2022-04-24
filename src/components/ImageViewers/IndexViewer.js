@@ -3,23 +3,23 @@ import { Grid, Box } from "theme-ui"
 // @jsx jsx
 import { jsx } from "theme-ui"
 
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const IndexView = ({ images, jumpToImage, mt }) => {
   return (
     <Grid
       mt={[mt, mt, "auto"]}
       gap={16}
-      columns={[[2, "1fr 1fr 1fr"], [3, "1fr 1fr 1fr"], [(3, "1fr 1fr 1fr")]]}
+      columns={[[2, "1fr 1fr"], [2, "1fr 1fr"], [(2, "1fr 1fr")]]}
       pb={4}
     >
       {images.map((image, index) => (
         <Box css={{ cursor: "crosshair" }} onClick={() => jumpToImage(index)}>
-          <Img
+          <GatsbyImage
+            image={image.image.asset.gatsbyImageData}
             imgStyle={{
               objectFit: "contain",
             }}
-            fluid={image.image.asset.fluid}
           />
         </Box>
       ))}

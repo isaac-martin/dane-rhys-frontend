@@ -2,18 +2,21 @@ import React from "react"
 import Link from "../Link"
 import { Box, Flex } from "theme-ui"
 import styled from "@emotion/styled"
+import { AnimatePresence, motion } from "framer-motion"
 
-const headingStyle = theme => ({
+const headingStyle = () => ({
   fontSize: 18,
   fontWeight: `bold`,
   letterSpacing: "0.1em",
   textTransform: "uppercase",
-  color: "black",
+  color: "white",
   textDecoration: `none`,
 })
 
-export const MenuHeading = styled.h3(({ theme }) => ({
+export const MenuHeading = styled.h3(() => ({
   ...headingStyle(),
+  cursor: `pointer`,
+  marginBottom: 5,
 }))
 
 export const MenuItem = styled(Link)(({ theme }) => ({
@@ -21,11 +24,11 @@ export const MenuItem = styled(Link)(({ theme }) => ({
   fontWeight: `normal`,
   letterSpacing: "0.1em",
   textTransform: "uppercase",
-  color: "black",
+  color: "white",
   transition: "color .3s ease",
   textDecoration: `none`,
   marginTop: theme.space[2],
-  textAlign: 'center',
+  textAlign: "left",
   ":hover": {
     color: theme.colors.primary,
   },
@@ -39,21 +42,60 @@ const HeadingLink = styled(Link)(({ theme }) => ({
   },
 }))
 
-const SubMenu = ({ data: { title, titleLink, menuItems } }) => {
+const SubMenu = ({
+  data: { title, titleLink, menuItems },
+  setMenuOpen,
+  openMenu,
+}) => {
   return (
     <Box marginBottom={3}>
       <nav>
-        <Flex sx={{ flexDirection: "column", alignItems: `center` }}>
+        <Flex sx={{ flexDirection: "column", alignItems: `flex-start` }}>
           {titleLink ? (
             <HeadingLink to={`/${titleLink.slug.current}`}>{title}</HeadingLink>
           ) : (
-            <MenuHeading>{title}</MenuHeading>
+            <MenuHeading
+              onClick={() => setMenuOpen(openMenu === title ? "" : title)}
+            >
+              {title}
+            </MenuHeading>
           )}
-          {menuItems.map(item => (
-            <MenuItem to={item.url ? item.url : `/${item.slug.current}`}>
-              {item.title}
-            </MenuItem>
-          ))}
+          <AnimatePresence>
+            {openMenu === title && (
+              <motion.div
+                key="content"
+                initial="collapsed"
+                animate="open"
+                exit="collapsed"
+                variants={{
+                  open: { opacity: 1, height: "auto" },
+                  collapsed: { opacity: 0, height: 0 },
+                }}
+                style={{ display: `flex`, flexWrap: `wrap` }}
+              >
+                {menuItems.map((item, idx) => (
+                  <div style={{ padding: `5px 0` }}>
+                    <MenuItem
+                      to={item.url ? item.url : `/${item.slug.current}`}
+                    >
+                      {item.title}
+                    </MenuItem>
+                    {idx !== menuItems.length - 1 && (
+                      <span
+                        style={{
+                          margin: `0 20px`,
+                          fontWeight: `bold`,
+                          color: "white",
+                        }}
+                      >
+                        |
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </Flex>
       </nav>
     </Box>

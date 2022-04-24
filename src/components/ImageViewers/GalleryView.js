@@ -4,7 +4,7 @@ import { useSwipeable } from "react-swipeable"
 // @jsx jsx
 import { jsx } from "theme-ui"
 import { motion, AnimatePresence } from "framer-motion"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const variants = {
   enter: () => {
@@ -122,10 +122,10 @@ const GalleryView = ({ currentImage, increment, decrement, index, mt }) => {
             mb={[0, 0, 0]}
             mt={[0, 0, 0]}
           >
-            <Img
+            <GatsbyImage
+              image={currentImage.image.asset.gatsbyImageData}
               style={{ maxHeight: "100%", width: "100%", height: "100%" }}
               imgStyle={{ objectFit: "contain" }}
-              fluid={currentImage.image.asset.fluid}
             />
           </Box>
         </motion.div>

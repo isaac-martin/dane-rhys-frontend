@@ -2,7 +2,6 @@ import BaseBlockContent from "@sanity/block-content-to-react"
 // @jsx jsx
 import { jsx } from "theme-ui"
 import { Box, Heading } from "theme-ui"
-import React from "react"
 const serializers = {
   marks: {
     link: ({ mark, children }) => {
@@ -63,8 +62,17 @@ const serializers = {
 
 const BlockContent = ({ blocks, fontFamily, marginBottom = 60, marginTop }) => {
   return (
-    <Box sx={{ fontFamily, marginBottom, marginTop }}>
-      <BaseBlockContent blocks={blocks} serializers={serializers} />
+    <Box
+      className="blockContent-wrapper"
+      sx={{ fontFamily, marginBottom, marginTop }}
+    >
+      <BaseBlockContent
+        projectId="ixzt230q"
+        dataset="production"
+        blocks={blocks}
+        serializers={serializers}
+        imageOptions={{ fit: "max" }}
+      />
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react"
 import Submenu from "./SubMenu"
-
 import { useStaticQuery, graphql } from "gatsby"
+import { motion, AnimatePresence } from "framer-motion"
 
 const MainMenu = () => {
   const menu = useStaticQuery(graphql`
@@ -62,24 +62,18 @@ const MainMenu = () => {
             }
           }
         }
-        homeImages {
-          asset {
-            fluid {
-              ...GatsbySanityImageFluid
-            }
-          }
-        }
       }
     }
   `)
 
   const subMenus = menu.sanityMenu.menuItems
+  const [openMenu, setMenuOpen] = React.useState("")
   return (
-    <section style={{ paddingBottom: 30 }}>
+    <>
       {subMenus.map(sm => (
-        <Submenu data={sm} />
+        <Submenu data={sm} openMenu={openMenu} setMenuOpen={setMenuOpen} />
       ))}
-    </section>
+    </>
   )
 }
 
