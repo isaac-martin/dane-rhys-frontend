@@ -47,12 +47,17 @@ const SubMenu = ({
   setMenuOpen,
   openMenu,
 }) => {
+  const buildTitleLink = titleLink => {
+    if (titleLink.slug) return `/${titleLink.slug.current}`
+    if (titleLink.url) return titleLink.url
+    return "/"
+  }
   return (
     <Box marginBottom={3}>
       <nav>
         <Flex sx={{ flexDirection: "column", alignItems: `flex-start` }}>
           {titleLink ? (
-            <HeadingLink to={`/${titleLink.slug.current}`}>{title}</HeadingLink>
+            <HeadingLink to={buildTitleLink(titleLink)}>{title}</HeadingLink>
           ) : (
             <MenuHeading
               onClick={() => setMenuOpen(openMenu === title ? "" : title)}
