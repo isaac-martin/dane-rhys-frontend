@@ -10,6 +10,12 @@ const MainMenu = () => {
         menuItems {
           title
           titleLink {
+            ... on SanityProjectGroup {
+              title
+              slug {
+                current
+              }
+            }
             ... on SanityCustomLink {
               title
               url
@@ -54,6 +60,13 @@ const MainMenu = () => {
               title
             }
             ... on SanityVideoProject {
+              id
+              slug {
+                current
+              }
+              title
+            }
+            ... on SanityProjectGroup {
               id
               slug {
                 current

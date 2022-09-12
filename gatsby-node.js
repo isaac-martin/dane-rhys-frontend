@@ -12,6 +12,17 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allSanityProjectGroup(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            _id
+            title
+            slug {
+              current
+            }
+          }
+        }
+      }
       allSanityVideoProject(filter: { slug: { current: { ne: null } } }) {
         edges {
           node {
@@ -44,9 +55,24 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const projects = result.data.allSanityProject.edges || []
+  const groups = result.data.allSanityProjectGroup.edges || []
+
   const videos = result.data.allSanityVideoProject.edges || []
   const pages = result.data.allSanityPage.edges || []
   const redirects = result.data.sanitySiteSettings.redirects || []
+  groups.forEach(edge => {
+    const path = `/${edge.node.slug.current}`
+    createPage({
+      path: path === "/featured" ? "/" : path,
+      component: require.resolve("./src/templates/group.js"),
+      context: {
+        slug: edge.node.slug.current,
+        id: edge.node._id,
+        title: edge.node.title,
+      },
+    })
+  })
+
   projects.forEach((edge, index) => {
     const path = `/${edge.node.slug.current}`
     createPage({
@@ -72,7 +98,6 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
   redirects.forEach(redirect => {
-  console.log(redirect)
     createRedirect({
       fromPath: redirect.from,
       toPath: redirect.to,
