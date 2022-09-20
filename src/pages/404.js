@@ -4,7 +4,7 @@ import Link from "../components/Link"
 import { Heading, Text } from "theme-ui"
 
 const NotFound = () => (
-  <DefaultPage title="404">
+  <DefaultPage pageTitle="404">
     <Heading
       as="h2"
       sx={{
