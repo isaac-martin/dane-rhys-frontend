@@ -169,21 +169,22 @@ const ProjectTemplate = ({ data: { sanityProject } }) => {
 
   return (
     <Layout>
+      <SEO
+        title={sanityProject.title}
+        image={socialSharing && socialSharing.image.asset.url}
+        description={
+          socialSharing && _rawSocialSharing.text[0].children[0].text
+        }
+      />
       {!showPage ? (
         <PasswordProtect
+          title={sanityProject.title}
+          featuredImage={sanityProject.featuredImage}
           password={sanityProject.password}
           onSuccess={() => setShowPage(true)}
         />
       ) : (
         <>
-          <SEO
-            title={sanityProject.title}
-            image={socialSharing && socialSharing.image.asset.url}
-            description={
-              socialSharing && _rawSocialSharing.text[0].children[0].text
-            }
-          />
-
           <Modal
             isOpen={isModalOpen}
             onRequestClose={closeModal}
@@ -396,6 +397,11 @@ export const projectData = graphql`
     sanityProject(slug: { current: { eq: $slug } }) {
       title
       password
+      featuredImage {
+        asset {
+          gatsbyImageData
+        }
+      }
       _rawProjectDescription(resolveReferences: { maxDepth: 10 })
       _rawProjectIntro(resolveReferences: { maxDepth: 10 })
       _rawImages(resolveReferences: { maxDepth: 10 })

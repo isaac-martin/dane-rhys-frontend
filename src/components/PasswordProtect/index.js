@@ -2,8 +2,9 @@ import React from "react"
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { Flex, Input, Button, Text } from "theme-ui"
+import { GatsbyImage } from "gatsby-plugin-image"
 
-const PasswordProtect = ({ password, onSuccess }) => {
+const PasswordProtect = ({ password, onSuccess, title, featuredImage }) => {
   const [showError, setShowError] = React.useState(false)
   const handleSubmit = e => {
     e.preventDefault()
@@ -16,8 +17,18 @@ const PasswordProtect = ({ password, onSuccess }) => {
   }
 
   return (
-    <Flex sx={{ flexDirection: "column", maxWidth: "max-content" }}>
-      <Flex sx={{ margin: "0 auto", alignItems: "center" }}>
+    <Flex sx={{ flexDirection: "column", maxWidth: "max-content", gap: 4 }}>
+      <Text
+        as="h1"
+        sx={{
+          fontWeight: 600,
+          fontSize: 4,
+        }}
+      >
+        {title}
+      </Text>
+      <Flex sx={{ flexDirection: "column" }}>
+        <Text mb="2">Enter Password</Text>
         <form onSubmit={handleSubmit} sx={{ display: "flex" }}>
           <Input type="text" name="password" sx={{ maxWidth: 200, mr: 1 }} />
           <Button type="submit" variant="black">
@@ -30,6 +41,26 @@ const PasswordProtect = ({ password, onSuccess }) => {
           Incorrect Password
         </Text>
       ) : null}
+      <Flex
+        sx={{
+          flexDirection: ["row", "row", "column"],
+          margin: "0 auto",
+          alignItems: "flex-start",
+          gap: 4,
+          justifyContent: "flex-start",
+        }}
+      >
+        <GatsbyImage
+          image={featuredImage.asset.gatsbyImageData}
+          style={{
+            maxHeight: "100%",
+            width: "100%",
+            height: "100%",
+            maxWidth: 600,
+          }}
+          imgStyle={{ objectFit: "contain" }}
+        />
+      </Flex>
     </Flex>
   )
 }
