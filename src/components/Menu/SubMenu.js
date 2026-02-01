@@ -48,8 +48,8 @@ const SubMenu = ({
   openMenu,
 }) => {
   const buildTitleLink = titleLink => {
-    if (titleLink.slug.current === "featured") return `/`
-    if (titleLink.slug) return `/${titleLink.slug.current}`
+    if (titleLink.slug?.current === "featured") return `/`
+    if (titleLink.slug) return `/${titleLink.slug?.current}`
     if (titleLink.url) return titleLink.url
     return "/"
   }
